@@ -1,0 +1,300 @@
+/* ==========================================================================
+   Prediction.css
+   Enterprise HealthTech Diagnostic Interface Styles
+   ========================================================================== */
+
+:root {
+  --predict-primary: #0f4c81;
+  --predict-primary-hover: #0a3863;
+  --predict-bg: #ffffff;
+  --predict-bg-secondary: #f8fafc;
+  --predict-border: rgba(226, 232, 240, 0.8);
+  --predict-text-main: #0f172a;
+  --predict-text-muted: #64748b;
+  --predict-error-bg: #fef2f2;
+  --predict-error-text: #b91c1c;
+  --predict-error-border: #fca5a5;
+  --predict-radius: 16px;
+  --predict-transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --predict-primary: #3b82f6;
+    --predict-primary-hover: #60a5fa;
+    --predict-bg: #0f172a;
+    --predict-bg-secondary: #1e293b;
+    --predict-border: rgba(51, 65, 85, 0.8);
+    --predict-text-main: #f8fafc;
+    --predict-text-muted: #94a3b8;
+    --predict-error-bg: rgba(185, 28, 28, 0.1);
+    --predict-error-text: #f87171;
+    --predict-error-border: rgba(248, 113, 113, 0.3);
+  }
+}
+
+/* ==========================================================================
+   MAIN VIEWPORT & HEADER
+   ========================================================================== */
+.predict-viewport-flow {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 32px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  color: var(--predict-text-main);
+  animation: predict-fade-in 0.4s ease-out;
+}
+
+.predict-header-panel h1 {
+  font-size: 32px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  margin: 0 0 8px 0;
+}
+
+.predict-header-panel p {
+  font-size: 16px;
+  color: var(--predict-text-muted);
+  margin: 0;
+  max-width: 600px;
+}
+
+/* ==========================================================================
+   INGESTION LAYOUT (FORM + DROPZONE)
+   ========================================================================== */
+.predict-ingestion-layout-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  align-items: stretch;
+}
+
+.predict-patient-form-card,
+.predict-ingestion-card {
+  background: var(--predict-bg);
+  border: 1px solid var(--predict-border);
+  border-radius: var(--predict-radius);
+  padding: 32px;
+  box-shadow: 0 4px 24px -12px rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.predict-patient-form-card h2,
+.predict-ingestion-card h2 {
+  font-size: 18px;
+  font-weight: 700;
+  margin: 0;
+  border-bottom: 1px solid var(--predict-border);
+  padding-bottom: 16px;
+}
+
+/* ==========================================================================
+   FORM INPUTS MATRICES
+   ========================================================================== */
+.form-fields-matrix {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.input-row-split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.input-group label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--predict-text-muted);
+}
+
+.input-group input,
+.input-group select,
+.input-group textarea {
+  background-color: var(--predict-bg-secondary);
+  border: 1px solid var(--predict-border);
+  color: var(--predict-text-main);
+  padding: 12px 16px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-family: inherit;
+  transition: var(--predict-transition);
+  outline: none;
+}
+
+.input-group textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+.input-group input:focus,
+.input-group select:focus,
+.input-group textarea:focus {
+  border-color: var(--predict-primary);
+  box-shadow: 0 0 0 3px rgba(15, 76, 129, 0.1);
+}
+
+@media (prefers-color-scheme: dark) {
+  .input-group input:focus,
+  .input-group select:focus,
+  .input-group textarea:focus {
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+  }
+}
+
+/* ==========================================================================
+   EXECUTION ACTIONS
+   ========================================================================== */
+.predict-execute-action {
+  margin-top: auto;
+  width: 100%;
+  padding: 16px;
+  background-color: var(--predict-primary);
+  color: #ffffff;
+  border: none;
+  border-radius: 12px;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: var(--predict-transition);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.predict-execute-action:hover:not(:disabled) {
+  background-color: var(--predict-primary-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 16px -8px var(--predict-primary);
+}
+
+.predict-execute-action:disabled {
+  background-color: var(--predict-border);
+  color: var(--predict-text-muted);
+  cursor: not-allowed;
+}
+
+/* Spinner Framework */
+.button-spinner-housing {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.action-inline-spinner {
+  width: 18px;
+  height: 18px;
+  border: 2.5px solid rgba(255, 255, 255, 0.3);
+  border-top-color: #ffffff;
+  border-radius: 50%;
+  animation: predict-spin 0.8s linear infinite;
+}
+
+@keyframes predict-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ==========================================================================
+   EXCEPTION TOAST (ERRORS)
+   ========================================================================== */
+.predict-exception-toast {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background-color: var(--predict-error-bg);
+  border: 1px solid var(--predict-error-border);
+  color: var(--predict-error-text);
+  padding: 16px 20px;
+  border-radius: 12px;
+  font-weight: 500;
+  font-size: 14px;
+  animation: predict-fade-in 0.3s ease-out;
+}
+
+/* ==========================================================================
+   TELEMETRY DASHBOARD (RESULTS)
+   ========================================================================== */
+.predict-telemetry-dashboard {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  margin-top: 16px;
+  animation: predict-slide-up 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.telemetry-primary-split,
+.telemetry-vision-grids {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+
+.telemetry-metrics-block {
+  width: 100%;
+}
+
+.telemetry-interactive-footer {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin-top: 8px;
+}
+
+/* ==========================================================================
+   ANIMATIONS & RESPONSIVE BREAKPOINTS
+   ========================================================================== */
+@keyframes predict-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes predict-slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Tablet & Mobile Overrides */
+@media (max-width: 960px) {
+  .predict-ingestion-layout-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .telemetry-primary-split,
+  .telemetry-vision-grids,
+  .telemetry-interactive-footer {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  .input-row-split {
+    grid-template-columns: 1fr;
+  }
+
+  .predict-viewport-flow {
+    padding: 16px;
+  }
+}

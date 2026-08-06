@@ -1,0 +1,280 @@
+/* ==========================================================================
+   Register.css
+   Secure Account Registration Interface Stylesheet
+   ========================================================================== */
+
+:root {
+  --auth-bg: #f8fafc;
+  --auth-card-bg: #ffffff;
+  --auth-primary: #0f4c81;
+  --auth-primary-hover: #0a3863;
+  --auth-border: rgba(226, 232, 240, 0.8);
+  --auth-text-main: #0f172a;
+  --auth-text-muted: #64748b;
+  --auth-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.05);
+  --auth-radius: 12px;
+
+  /* Password Strength Scale Colors */
+  --strength-weak: #ef4444;
+  --strength-medium: #f59e0b;
+  --strength-strong: #10b981;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --auth-bg: #0f172a;
+    --auth-card-bg: #1e293b;
+    --auth-primary: #3b82f6;
+    --auth-primary-hover: #2563eb;
+    --auth-border: rgba(51, 65, 85, 0.7);
+    --auth-text-main: #f8fafc;
+    --auth-text-muted: #94a3b8;
+    --auth-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
+  }
+}
+
+/* ==========================================================================
+   BASE REUSED AUTH CONTEXT STYLES
+   ========================================================================== */
+.login-container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--auth-bg);
+  padding: 24px;
+}
+
+.login-form {
+  background: var(--auth-card-bg);
+  border: 1px solid var(--auth-border);
+  border-radius: var(--auth-radius);
+  box-shadow: var(--auth-shadow);
+  width: 100%;
+  max-width: 440px;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  animation: auth-fade-up 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.btn-back {
+  background: none;
+  border: none;
+  color: var(--auth-text-muted);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  align-self: flex-start;
+  padding: 0;
+  margin-bottom: 24px;
+  transition: color 0.15s ease;
+}
+
+.btn-back:hover {
+  color: var(--auth-primary);
+}
+
+.login-form h1 {
+  font-size: 26px;
+  font-weight: 800;
+  color: var(--auth-text-main);
+  margin: 0 0 6px 0;
+  letter-spacing: -0.02em;
+}
+
+.login-form p:first-of-type {
+  font-size: 14px;
+  color: var(--auth-text-muted);
+  margin: 0 0 24px 0;
+}
+
+/* ==========================================================================
+   INPUT MULTI-GROUP ARCHITECTURE
+   ========================================================================== */
+.input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 18px;
+}
+
+.input-group label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--auth-text-main);
+}
+
+.input-group input {
+  width: 100%;
+  padding: 11px 16px;
+  background-color: transparent;
+  border: 1px solid var(--auth-border);
+  border-radius: 8px;
+  font-size: 14px;
+  color: var(--auth-text-main);
+  outline: none;
+  transition: all 0.2s ease;
+}
+
+.input-group input:focus {
+  border-color: var(--auth-primary);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+}
+
+/* Password Layout Extension Elements */
+.password-box {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.password-box input {
+  padding-right: 64px;
+}
+
+.btn-toggle {
+  position: absolute;
+  right: 12px;
+  background: none;
+  border: none;
+  color: var(--auth-text-muted);
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  padding: 4px 8px;
+  user-select: none;
+}
+
+.btn-toggle:hover {
+  color: var(--auth-text-main);
+}
+
+/* ==========================================================================
+   DYNAMIC STRENGTH TRACKER METER
+   ========================================================================== */
+.strength-text {
+  font-size: 12px;
+  color: var(--auth-text-muted);
+  margin-top: -2px;
+}
+
+/* Match layout content patterns from utility strings safely */
+.strength-text b {
+  font-weight: 700;
+  transition: color 0.2s ease;
+}
+
+.strength-text b:has(text:contains("Weak")),
+.strength-text b:contains("Weak") {
+  color: var(--strength-weak);
+}
+
+.strength-text b:contains("Medium") {
+  color: var(--strength-medium);
+}
+
+.strength-text b:contains("Strong") {
+  color: var(--strength-strong);
+}
+
+/* ==========================================================================
+   SUBMIT TRIGGERS & FOOTER BALANCERS
+   ========================================================================== */
+.btn-submit {
+  width: 100%;
+  padding: 12px 24px;
+  background-color: var(--auth-primary);
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  margin-top: 8px;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.btn-submit:hover:not(:disabled) {
+  background-color: var(--auth-primary-hover);
+  transform: translateY(-0.5px);
+}
+
+.btn-submit:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.error-message {
+  background-color: rgba(239, 68, 68, 0.1);
+  border: 1px solid rgba(239, 68, 68, 0.25);
+  color: #ef4444;
+  padding: 12px 16px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 20px;
+  animation: auth-shake 0.35s ease-in-out;
+}
+
+.footer-text {
+  text-align: center;
+  font-size: 13px;
+  color: var(--auth-text-muted) !important;
+  margin: 24px 0 0 0 !important;
+}
+
+.footer-text a {
+  color: var(--auth-primary);
+  text-decoration: none;
+  font-weight: 700;
+}
+
+.footer-text a:hover {
+  text-decoration: underline;
+}
+
+/* ==========================================================================
+   ANIMATION KEYFRAMES
+   ========================================================================== */
+@keyframes auth-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes auth-shake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-4px);
+  }
+  75% {
+    transform: translateX(4px);
+  }
+}
+
+/* ==========================================================================
+   RESPONSIVE DESIGN BREAKPOINTS
+   ========================================================================== */
+@media (max-width: 480px) {
+  .login-form {
+    padding: 32px 20px;
+    border: none;
+    box-shadow: none;
+    background: transparent;
+  }
+  .login-container {
+    background-color: var(--auth-card-bg);
+    align-items: flex-start;
+    padding-top: 20px;
+  }
+}

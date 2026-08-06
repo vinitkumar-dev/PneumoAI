@@ -1,0 +1,466 @@
+/* Hero.css */
+
+/* ==========================================================================
+   DESIGN SYSTEMS & COMPONENT VARIABLES
+   ========================================================================== */
+:root {
+  --hr-bg-section: #f8fafc;
+  --hr-text-main: #0f172a;
+  --hr-text-muted: #475569;
+
+  --hr-primary: #0284c7;
+  --hr-primary-hover: #0369a1;
+  --hr-secondary-bg: rgba(255, 255, 255, 0.8);
+  --hr-secondary-border: #cbd5e1;
+  --hr-secondary-hover: #f8fafc;
+
+  --hr-card-bg: rgba(255, 255, 255, 0.7);
+  --hr-border-light: rgba(226, 232, 240, 0.8);
+  --hr-accent: #38bdf8;
+
+  --hr-grid-unit: 8px;
+  --hr-radius: 24px;
+  --hr-shadow: 0 20px 40px -15px rgba(15, 23, 42, 0.04);
+  --hr-transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --hr-bg-section: #090e1a;
+    --hr-text-main: #f8fafc;
+    --hr-text-muted: #94a3b8;
+
+    --hr-primary: #38bdf8;
+    --hr-primary-hover: #7dd3fc;
+    --hr-secondary-bg: rgba(30, 41, 59, 0.4);
+    --hr-secondary-border: rgba(71, 85, 105, 0.6);
+    --hr-secondary-hover: rgba(51, 65, 85, 0.5);
+
+    --hr-card-bg: rgba(15, 23, 42, 0.6);
+    --hr-border-light: rgba(51, 65, 85, 0.5);
+    --hr-shadow: 0 30px 60px -20px rgba(0, 0, 0, 0.4);
+  }
+}
+
+/* ==========================================================================
+   GLOBAL STRUCTURE & AMBIENT GRAPHICS
+   ========================================================================== */
+.hero {
+  position: relative;
+  background-color: var(--hr-bg-section);
+  padding: calc(16 * var(--hr-grid-unit)) 0 calc(14 * var(--hr-grid-unit));
+  overflow: hidden;
+  contain: content;
+}
+
+.hero-container {
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 calc(6 * var(--hr-grid-unit));
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  align-items: center;
+  gap: calc(8 * var(--hr-grid-unit));
+  box-sizing: border-box;
+}
+
+.hero-blur-backdrop {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.hero-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(140px);
+  opacity: 0.25;
+  will-change: transform;
+}
+
+.hero-orb-1 {
+  top: -10%;
+  right: 10%;
+  width: 500px;
+  height: 500px;
+  background: rgba(14, 165, 233, 0.15);
+}
+
+.hero-orb-2 {
+  bottom: 5%;
+  left: 5%;
+  width: 400px;
+  height: 400px;
+  background: rgba(2, 132, 199, 0.1);
+}
+
+/* ==========================================================================
+   LEFT COLUMN: CONTENT & ACTION PARADIGM
+   ========================================================================== */
+.hero-content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: calc(1 * var(--hr-grid-unit));
+  padding: 6px 14px;
+  border-radius: 9999px;
+  background: rgba(14, 165, 233, 0.08);
+  border: 1px solid rgba(14, 165, 233, 0.15);
+  color: var(--hr-primary);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  margin-bottom: calc(3 * var(--hr-grid-unit));
+  width: fit-content;
+}
+
+.hero-content h1 {
+  font-size: clamp(2.25rem, 5vw, 3.5rem);
+  color: var(--hr-text-main);
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: -0.03em;
+  margin: 0 0 calc(2.5 * var(--hr-grid-unit)) 0;
+}
+
+.hero-highlight {
+  background: linear-gradient(135deg, #0ea5e9 0%, #0284c7 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.hero-description {
+  font-size: clamp(16px, 2vw, 18px);
+  line-height: 1.65;
+  color: var(--hr-text-muted);
+  margin: 0 0 calc(5 * var(--hr-grid-unit)) 0;
+  max-width: 600px;
+}
+
+/* Operational Callouts */
+.hero-buttons {
+  display: flex;
+  align-items: center;
+  gap: calc(2 * var(--hr-grid-unit));
+  margin-bottom: calc(8 * var(--hr-grid-unit));
+  flex-wrap: wrap;
+}
+
+.hero-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 50px;
+  padding: 0 calc(3.5 * var(--hr-grid-unit));
+  font-size: 15px;
+  font-weight: 600;
+  border-radius: 14px;
+  text-decoration: none;
+  transition: var(--hr-transition);
+  box-sizing: border-box;
+}
+
+.h-primary-btn {
+  background: var(--hr-primary);
+  color: #ffffff;
+  gap: calc(1 * var(--hr-grid-unit));
+  box-shadow: 0 4px 14px rgba(2, 132, 199, 0.25);
+}
+
+.h-primary-btn:hover {
+  background: var(--hr-primary-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(2, 132, 199, 0.4);
+}
+
+.h-primary-btn svg {
+  transition: transform 0.2s ease;
+}
+
+.h-primary-btn:hover svg {
+  transform: translateX(3px);
+}
+
+.h-secondary-btn {
+  background: var(--hr-secondary-bg);
+  border: 1px solid var(--hr-secondary-border);
+  color: var(--hr-text-main);
+}
+
+.h-secondary-btn:hover {
+  background: var(--hr-secondary-hover);
+  border-color: var(--hr-text-main);
+  transform: translateY(-2px);
+}
+
+.hero-btn:active {
+  transform: translateY(0);
+}
+
+/* Metrics Architecture Grid */
+.hero-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: calc(2 * var(--hr-grid-unit));
+}
+
+.stat-card {
+  position: relative;
+  background: var(--hr-card-bg);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--hr-border-light);
+  border-radius: 16px;
+  padding: calc(2.5 * var(--hr-grid-unit));
+  box-shadow: var(--hr-shadow);
+  overflow: hidden;
+}
+
+.stat-inner-glow {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    circle at top left,
+    rgba(14, 165, 233, 0.05),
+    transparent 60%
+  );
+  pointer-events: none;
+}
+
+.stat-card h2 {
+  font-size: clamp(20px, 3vw, 28px);
+  font-weight: 800;
+  color: var(--hr-text-main);
+  margin: 0 0 4px 0;
+  letter-spacing: -0.02em;
+}
+
+.stat-card span {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--hr-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+/* ==========================================================================
+   RIGHT COLUMN: INTERACTIVE VISUALIZATION MONITOR
+   ========================================================================== */
+.hero-image-pane {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  justify-content: center;
+}
+
+.scan-card {
+  background: var(--hr-card-bg);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  border: 1px solid var(--hr-border-light);
+  border-radius: var(--hr-radius);
+  padding: 20px;
+  width: 100%;
+  max-width: 420px;
+  box-shadow:
+    var(--hr-shadow),
+    0 30px 60px -15px rgba(15, 23, 42, 0.08);
+}
+
+.scan-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--hr-text-muted);
+  margin-bottom: 16px;
+}
+
+.scan-status-dot {
+  width: 6px;
+  height: 6px;
+  background-color: #10b981;
+  border-radius: 50%;
+  box-shadow: 0 0 8px #10b981;
+}
+
+.scan-viewport-wrapper {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1;
+  background: rgba(148, 163, 184, 0.05);
+  border-radius: 14px;
+  border: 1px solid var(--hr-border-light);
+  overflow: hidden;
+  margin-bottom: 16px;
+}
+
+.scan-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--hr-text-muted);
+  opacity: 0.25;
+}
+
+/* Cybernetic Scanline Matrix Effect */
+.scan-laser-line {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--hr-accent),
+    transparent
+  );
+  box-shadow: 0 0 12px var(--hr-accent);
+  animation: scanning-hardware-loop 3s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+@keyframes scanning-hardware-loop {
+  0%,
+  100% {
+    top: 0%;
+    opacity: 0.3;
+  }
+  50% {
+    top: 100%;
+    opacity: 1;
+  }
+}
+
+.scan-result {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 12px 14px;
+  border-radius: 10px;
+  margin-bottom: 12px;
+  border: 1px solid rgba(16, 185, 129, 0.15);
+  background: rgba(16, 185, 129, 0.06);
+}
+
+.engine-tag {
+  font-size: 11px;
+  font-weight: 700;
+  color: #10b981;
+  text-transform: uppercase;
+}
+
+.result-metric {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--hr-text-main);
+}
+
+.scan-progress-track {
+  width: 100%;
+  height: 4px;
+  background: var(--hr-border-light);
+  border-radius: 99px;
+  overflow: hidden;
+}
+
+.scan-progress-fill {
+  width: 97.64%;
+  height: 100%;
+  background-color: #10b981;
+  border-radius: 99px;
+}
+
+/* ==========================================================================
+   DYNAMIC RESPONSIVE DESIGN Breakpoints
+   ========================================================================== */
+@media (max-width: 1024px) {
+  .hero {
+    padding: calc(12 * var(--hr-grid-unit)) 0 calc(10 * var(--hr-grid-unit));
+  }
+
+  .hero-container {
+    grid-template-columns: 1fr;
+    gap: calc(6 * var(--hr-grid-unit));
+  }
+
+  .hero-content {
+    align-items: center;
+    text-align: center;
+  }
+
+  .hero-badge,
+  .hero-description {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .hero-buttons {
+    justify-content: center;
+  }
+
+  .hero-stats {
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .scan-card {
+    max-width: 360px;
+  }
+}
+
+@media (max-width: 640px) {
+  .hero {
+    padding-top: calc(8 * var(--hr-grid-unit));
+  }
+
+  .hero-container {
+    padding: 0 calc(4 * var(--hr-grid-unit));
+  }
+
+  .hero-stats {
+    grid-template-columns: 1fr;
+    gap: calc(1.5 * var(--hr-grid-unit));
+  }
+
+  .hero-buttons {
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+    max-width: 320px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .hero-btn {
+    width: 100%;
+    height: 48px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-btn,
+  .scan-laser-line {
+    animation: none !important;
+    transition: none !important;
+    transform: none !important;
+  }
+  .scan-laser-line {
+    top: 50%;
+    opacity: 0.5;
+  }
+}

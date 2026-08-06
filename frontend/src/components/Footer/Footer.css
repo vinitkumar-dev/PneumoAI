@@ -1,0 +1,263 @@
+/* Footer.css */
+
+/* ==========================================================================
+   DESIGN TOKENS & DOMAIN ARCHITECTURE
+   ========================================================================== */
+:root {
+  --ft-bg: #0f172a;
+  --ft-bg-bottom: #090d16;
+  --ft-border: rgba(255, 255, 255, 0.05);
+  --ft-text-main: #ffffff;
+  --ft-text-muted: #94a3b8;
+  --ft-link: #cbd5e1;
+  --ft-link-active: #38bdf8;
+  --ft-accent: #0ea5e9;
+
+  --ft-grid-unit: 8px;
+  --ft-radius: 12px;
+  --ft-transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    --ft-bg: #1e293b;
+    --ft-bg-bottom: #0f172a;
+    --ft-border: rgba(255, 255, 255, 0.06);
+    --ft-text-main: #ffffff;
+    --ft-text-muted: #94a3b8;
+    --ft-link: #e2e8f0;
+    --ft-link-active: #38bdf8;
+  }
+}
+
+/* ==========================================================================
+   FOOTER FRAMEWORK BUILD
+   ========================================================================== */
+.footer {
+  background-color: var(--ft-bg);
+  border-top: 1px solid var(--ft-border);
+  padding-top: calc(10 * var(--ft-grid-unit));
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.footer-container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 calc(6 * var(--ft-grid-unit)) calc(8 * var(--ft-grid-unit));
+  display: grid;
+  grid-template-columns: 2fr repeat(2, 1fr) 1.5fr;
+  gap: calc(6 * var(--ft-grid-unit));
+  box-sizing: border-box;
+}
+
+.footer-section {
+  display: flex;
+  flex-direction: column;
+}
+
+/* ==========================================================================
+   BRAND COMPONENT INFRASTRUCTURE
+   ========================================================================== */
+.footer-logo {
+  display: flex;
+  align-items: center;
+  gap: calc(1.5 * var(--ft-grid-unit));
+  color: var(--ft-text-main);
+  margin-bottom: calc(2.5 * var(--ft-grid-unit));
+}
+
+.logo-svg {
+  color: var(--ft-accent);
+}
+
+.footer-logo h2 {
+  font-size: 20px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  margin: 0;
+}
+
+.brand-description {
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--ft-text-muted);
+  margin: 0;
+}
+
+/* ==========================================================================
+   NAVIGATION ARRAYS & COLUMNS
+   ========================================================================== */
+.footer-section h3 {
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--ft-text-main);
+  margin: 0 0 calc(3 * var(--ft-grid-unit)) 0;
+}
+
+.footer-nav {
+  display: flex;
+  flex-direction: column;
+  gap: calc(1.5 * var(--ft-grid-unit));
+}
+
+.footer-link {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--ft-link);
+  text-decoration: none;
+  transition: var(--ft-transition);
+  display: inline-block;
+  width: fit-content;
+}
+
+.footer-link:hover {
+  color: var(--ft-link-active);
+  transform: translateX(2px);
+}
+
+.footer-link.active {
+  color: var(--ft-link-active);
+  font-weight: 600;
+}
+
+/* ==========================================================================
+   CONTACT DETAILS & SOCIAL VECTORS
+   ========================================================================== */
+.contact-info {
+  gap: calc(2 * var(--ft-grid-unit));
+}
+
+.contact-item {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.contact-label {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  color: var(--ft-text-muted);
+}
+
+.contact-value {
+  font-size: 14px;
+  color: var(--ft-text-main);
+  text-decoration: none;
+  transition: var(--ft-transition);
+}
+
+a.contact-value:hover {
+  color: var(--ft-accent);
+}
+
+.footer-social {
+  display: flex;
+  align-items: center;
+  gap: calc(1.5 * var(--ft-grid-unit));
+  margin-top: calc(1 * var(--ft-grid-unit));
+}
+
+.social-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--ft-radius);
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--ft-border);
+  color: var(--ft-link);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--ft-transition);
+}
+
+.social-icon:hover {
+  background: var(--ft-accent);
+  color: #ffffff;
+  border-color: var(--ft-accent);
+  transform: translateY(-2px);
+}
+
+/* ==========================================================================
+   CLOSING CAP & VERIFICATION ROW
+   ========================================================================== */
+.footer-bottom {
+  background-color: var(--ft-bg-bottom);
+  border-top: 1px solid var(--ft-border);
+  padding: calc(3 * var(--ft-grid-unit)) 0;
+}
+
+.footer-bottom-container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 calc(6 * var(--ft-grid-unit));
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: calc(2 * var(--ft-grid-unit));
+  flex-wrap: wrap;
+  box-sizing: border-box;
+}
+
+.footer-bottom p {
+  font-size: 13px;
+  color: var(--ft-text-muted);
+  margin: 0;
+}
+
+.compliance-tag {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: #10b981;
+  background: rgba(16, 185, 129, 0.08);
+  padding: 4px 10px;
+  border-radius: 6px;
+  border: 1px solid rgba(16, 185, 129, 0.12);
+}
+
+/* ==========================================================================
+   DYNAMIC BREAKPOINT RESPONSIVENESS
+   ========================================================================== */
+@media (max-width: 1024px) {
+  .footer-container {
+    grid-template-columns: 1fr 1fr;
+    gap: calc(5 * var(--ft-grid-unit));
+  }
+}
+
+@media (max-width: 640px) {
+  .footer {
+    padding-top: calc(6 * var(--ft-grid-unit));
+  }
+
+  .footer-container {
+    grid-template-columns: 1fr;
+    gap: calc(4 * var(--ft-grid-unit));
+    padding: 0 calc(4 * var(--ft-grid-unit)) calc(6 * var(--ft-grid-unit));
+  }
+
+  .footer-section.brand-info {
+    border-bottom: 1px solid var(--ft-border);
+    padding-bottom: calc(4 * var(--ft-grid-unit));
+  }
+
+  .footer-bottom-container {
+    padding: 0 calc(4 * var(--ft-grid-unit));
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .footer-link,
+  .social-icon {
+    transition: none !important;
+    transform: none !important;
+  }
+}

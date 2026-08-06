@@ -1,0 +1,78 @@
+/* DashboardLayout.css */
+
+/* ==========================================================================
+   DESIGN SYSTEMS & COMPONENT LAYOUT ARCHITECTURE
+   ========================================================================== */
+:root {
+  --ly-bg-app: #f8fafc;
+  --ly-border-clean: rgba(226, 232, 240, 0.8);
+  --ly-grid-unit: 8px;
+  --ly-nav-height: 64px;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --ly-bg-app: #030712;
+    --ly-border-clean: rgba(51, 65, 85, 0.5);
+  }
+}
+
+/* ==========================================================================
+   STRUCTURAL MASTER CONTAINERS
+   ========================================================================== */
+.ly-app-shell {
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
+  height: 100vh;
+  min-height: 100vh;
+  overflow: hidden;
+  background-color: var(--ly-bg-app);
+  margin-top: 6rem;
+}
+
+/* Secondary Viewport Workspace Layer */
+.ly-viewport-canvas {
+  display: flex;
+  flex: 1;
+  width: 100%;
+  height: calc(100vh - var(--ly-nav-height));
+  overflow: hidden;
+  position: relative;
+}
+
+/* ==========================================================================
+   MAIN ROUTED CONTENT WINDOW FRAMEWORK
+   ========================================================================== */
+.ly-content-stage {
+  flex: 1;
+  height: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+  position: relative;
+
+  /* Scroll Anchoring Optimization Engine flags */
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+}
+
+.ly-scroll-wrapper {
+  padding: calc(4 * var(--ly-grid-unit));
+  max-width: 1600px;
+  width: 100%;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+/* Responsive Adaptive Viewport Adjustments */
+@media (max-width: 768px) {
+  .ly-scroll-wrapper {
+    padding: calc(2.5 * var(--ly-grid-unit));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ly-content-stage {
+    scroll-behavior: auto;
+  }
+}

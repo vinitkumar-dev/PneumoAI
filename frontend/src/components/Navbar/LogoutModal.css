@@ -1,0 +1,202 @@
+/* LogoutModal.css */
+
+/* ==========================================================================
+   DESIGN SYSTEMS & COMPONENT VARIABLES
+   ========================================================================== */
+:root {
+  --md-mask: rgba(15, 23, 42, 0.3);
+  --md-bg: rgba(255, 255, 255, 0.9);
+  --md-border: rgba(226, 232, 240, 0.8);
+  --md-text-main: #0f172a;
+  --md-text-muted: #475569;
+
+  --md-destructive: #dc2626;
+  --md-destructive-bg: rgba(220, 38, 38, 0.08);
+  --md-secondary-hover: rgba(15, 23, 42, 0.04);
+
+  --md-radius: 20px;
+  --md-grid-unit: 8px;
+  --md-transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  --md-shadow: 0 24px 64px -16px rgba(15, 23, 42, 0.16);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --md-mask: rgba(0, 0, 0, 0.6);
+    --md-bg: rgba(15, 23, 42, 0.8);
+    --md-border: rgba(51, 65, 85, 0.5);
+    --md-text-main: #f8fafc;
+    --md-text-muted: #94a3b8;
+
+    --md-destructive: #f87171;
+    --md-destructive-bg: rgba(248, 113, 113, 0.1);
+    --md-secondary-hover: rgba(255, 255, 255, 0.03);
+    --md-shadow: 0 32px 64px -16px rgba(0, 0, 0, 0.5);
+  }
+}
+
+/* ==========================================================================
+   OVERLAY MASK & DEPTH ANCHORS
+   ========================================================================== */
+.md-overlay-mask {
+  position: fixed;
+  inset: 0;
+
+  z-index: 9999;
+  background-color: var(--md-mask);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: calc(3 * var(--md-grid-unit));
+  animation: md-fade-in 0.2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+/* ==========================================================================
+   SURFACE SURFACE INTERFACES
+   ========================================================================== */
+.md-surface-panel {
+  width: 100%;
+  max-width: 400px;
+  margin-top: 24px; /* Added */
+
+  background: var(--md-bg);
+  backdrop-filter: blur(24px) saturate(160%);
+  -webkit-backdrop-filter: blur(24px) saturate(160%);
+  border: 1px solid var(--md-border);
+  border-radius: var(--md-radius);
+  box-shadow: var(--md-shadow);
+
+  padding: calc(3.5 * var(--md-grid-unit));
+  box-sizing: border-box;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+
+  animation: md-scale-up 0.25s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+/* Vector Canister Housing */
+.md-icon-canister {
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+  background-color: var(--md-destructive-bg);
+  color: var(--md-destructive);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: calc(2 * var(--md-grid-unit));
+}
+
+.md-surface-panel h2 {
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--md-text-main);
+  margin: 0 0 calc(1 * var(--md-grid-unit)) 0;
+  letter-spacing: -0.02em;
+}
+
+.md-surface-panel p {
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--md-text-muted);
+  margin: 0 0 calc(3.5 * var(--md-grid-unit)) 0;
+}
+
+/* ==========================================================================
+   INTERACTIVE SELECTION BUTTON TRACKS
+   ========================================================================== */
+.md-actions-row {
+  display: flex;
+  gap: calc(1.5 * var(--md-grid-unit));
+  width: 100%;
+}
+
+.md-btn {
+  flex: 1;
+  height: 40px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--md-transition);
+  box-sizing: border-box;
+}
+
+.md-btn-secondary {
+  background-color: transparent;
+  border: 1px solid var(--md-border);
+  color: var(--md-text-main);
+}
+
+.md-btn-secondary:hover {
+  background-color: var(--md-secondary-hover);
+  border-color: var(--md-text-main);
+}
+
+.md-btn-destructive {
+  background-color: var(--md-destructive);
+  border: 1px solid transparent;
+  color: #ffffff;
+}
+
+@media (prefers-color-scheme: dark) {
+  .md-btn-destructive {
+    color: #0b0f19;
+  }
+}
+
+.md-btn-destructive:hover {
+  opacity: 0.9;
+  transform: scale(0.99);
+}
+@media (max-width: 480px) {
+  .md-overlay-mask {
+    padding: 20px;
+  }
+
+  .md-surface-panel {
+    margin: 0;
+    width: 100%;
+  }
+}
+/* ==========================================================================
+   TRANSITION KEYFRAMES INTERFACES
+   ========================================================================== */
+@keyframes md-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes md-scale-up {
+  from {
+    opacity: 0;
+    transform: scale(0.95) translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+/* Accessibility overrides */
+@media (prefers-reduced-motion: reduce) {
+  .md-overlay-mask,
+  .md-surface-panel,
+  .md-btn {
+    animation: none !important;
+    transition: none !important;
+    transform: none !important;
+  }
+}

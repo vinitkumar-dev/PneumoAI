@@ -1,0 +1,281 @@
+/* ==========================================================================
+   About.css
+   Explainable AI Pipeline Documentation Layout
+   ========================================================================== */
+
+:root {
+  --ab-bg: #f8fafc;
+  --ab-card-bg: #ffffff;
+  --ab-primary: #0f4c81;
+  --ab-border: rgba(226, 232, 240, 0.8);
+  --ab-text-main: #0f172a;
+  --ab-text-muted: #64748b;
+  --ab-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.04);
+  --ab-radius: 16px;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --ab-bg: #0f172a;
+    --ab-card-bg: #1e293b;
+    --ab-primary: #3b82f6;
+    --ab-border: rgba(51, 65, 85, 0.7);
+    --ab-text-main: #f8fafc;
+    --ab-text-muted: #94a3b8;
+    --ab-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.3);
+  }
+}
+
+/* ==========================================================================
+   VIEWPORT OUTER STRUCTURE & BLUR BACKGROUNDS
+   ========================================================================== */
+.ab-viewport-flow {
+  position: relative;
+  background-color: var(--ab-bg);
+  padding: 80px 24px;
+  overflow: hidden;
+  width: 100%;
+}
+
+.ab-background-blur {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.blur-shape {
+  position: absolute;
+  background-color: var(--ab-primary);
+  opacity: 0.04;
+  filter: blur(100px);
+  border-radius: 50%;
+}
+
+.blur-shape-1 {
+  width: 400px;
+  height: 400px;
+  top: -100px;
+  right: -50px;
+}
+
+.blur-shape-2 {
+  width: 500px;
+  height: 500px;
+  bottom: -150px;
+  left: -100px;
+}
+
+@media (prefers-color-scheme: dark) {
+  .blur-shape {
+    opacity: 0.06;
+  }
+}
+
+/* ==========================================================================
+   HEADER SECTION & BADGES
+   ========================================================================== */
+.ab-content-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 2;
+}
+
+.ab-panel-header {
+  text-align: center;
+  max-width: 680px;
+  margin: 0 auto 60px auto;
+}
+
+.ab-section-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background-color: rgba(15, 76, 129, 0.08);
+  color: var(--ab-primary);
+  padding: 6px 14px;
+  border-radius: 30px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+
+@media (prefers-color-scheme: dark) {
+  .ab-section-badge {
+    background-color: rgba(59, 130, 246, 0.15);
+  }
+}
+
+.ab-badge-pulse {
+  width: 6px;
+  height: 6px;
+  background-color: var(--ab-primary);
+  border-radius: 50%;
+  box-shadow: 0 0 0 0 rgba(15, 76, 129, 0.4);
+  animation: badge-pulse-glow 2s infinite;
+}
+
+.ab-panel-header h2 {
+  font-size: 32px;
+  font-weight: 800;
+  color: var(--ab-text-main);
+  margin: 0 0 16px 0;
+  letter-spacing: -0.02em;
+}
+
+.ab-panel-header p {
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--ab-text-muted);
+  margin: 0;
+}
+
+/* ==========================================================================
+   PIPELINE MATRIX/GRID SYSTEM
+   ========================================================================== */
+.ab-pipeline-layout {
+  width: 100%;
+}
+
+.ab-pipeline-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 24px;
+  align-items: stretch;
+}
+
+/* Card Wrapper Box Elements */
+.ab-card-wrapper {
+  display: flex;
+  position: relative;
+  height: 100%;
+}
+
+.ab-pipeline-card {
+  background: var(--ab-card-bg);
+  border: 1px solid var(--ab-border);
+  border-radius: var(--ab-radius);
+  box-shadow: var(--ab-shadow);
+  padding: 32px 28px;
+  width: 100%;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.ab-pipeline-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--ab-primary);
+  box-shadow: 0 12px 30px -10px rgba(15, 23, 42, 0.08);
+}
+
+.ab-card-inner {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+/* ==========================================================================
+   CARD HARNESS COMPONENTS (ICONS & INDEXES)
+   ========================================================================== */
+.ab-icon-harness {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+}
+
+.ab-step-icon {
+  font-size: 28px;
+  background-color: rgba(15, 76, 129, 0.05);
+  width: 56px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+}
+
+@media (prefers-color-scheme: dark) {
+  .ab-step-icon {
+    background-color: rgba(255, 255, 255, 0.04);
+  }
+}
+
+.ab-step-index {
+  font-family: monospace;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--ab-text-muted);
+  opacity: 0.5;
+  background-color: var(--ab-bg);
+  padding: 4px 8px;
+  border-radius: 6px;
+  border: 1px solid var(--ab-border);
+}
+
+.ab-card-inner h3 {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--ab-text-main);
+  margin: 0 0 10px 0;
+}
+
+.ab-card-inner p {
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--ab-text-muted);
+  margin: 0;
+}
+
+/* ==========================================================================
+   DYNAMIC STEP CONNECTOR ARROWS (GRID CONTEXTS)
+   ========================================================================== */
+.ab-pipeline-arrow {
+  display: none; /* Safely fallback grid context maps to arrow structures */
+  position: absolute;
+  color: var(--ab-text-muted);
+  opacity: 0.3;
+  z-index: 5;
+}
+
+/* ==========================================================================
+   ANIMATION KEYFRAMES & RESPONSIVE BREAKPOINTS
+   ========================================================================== */
+@keyframes badge-pulse-glow {
+  0% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(15, 76, 129, 0.4);
+  }
+  70% {
+    transform: scale(1);
+    box-shadow: 0 0 0 6px rgba(15, 76, 129, 0);
+  }
+  100% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(15, 76, 129, 0);
+  }
+}
+
+@media (max-width: 640px) {
+  .ab-viewport-flow {
+    padding: 50px 16px;
+  }
+  .ab-panel-header h2 {
+    font-size: 26px;
+  }
+  .ab-panel-header p {
+    font-size: 14px;
+  }
+  .ab-pipeline-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  .ab-pipeline-card {
+    padding: 24px;
+  }
+}

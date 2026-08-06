@@ -1,0 +1,398 @@
+/* ==========================================================================
+   History.css
+   Institutional Patient Case Log & Audit Telemetry Workspace
+   ========================================================================== */
+
+:root {
+  --history-bg: #ffffff;
+  --history-bg-surface: #f8fafc;
+  --history-border: rgba(226, 232, 240, 0.8);
+  --history-text-main: #0f172a;
+  --history-text-muted: #64748b;
+  --history-shadow: 0 4px 24px -12px rgba(15, 23, 42, 0.05);
+  --history-radius: 12px;
+
+  /* Status Tag Color Arrays */
+  --tag-normal-bg: #f0fdf4;
+  --tag-normal-text: #166534;
+  --tag-normal-border: rgba(187, 247, 208, 0.6);
+  --tag-pneumonia-bg: #fef2f2;
+  --tag-pneumonia-text: #991b1b;
+  --tag-pneumonia-border: rgba(254, 226, 226, 0.6);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --history-bg: #0f172a;
+    --history-bg-surface: #1e293b;
+    --history-border: rgba(51, 65, 85, 0.7);
+    --history-text-main: #f8fafc;
+    --history-text-muted: #94a3b8;
+    --history-shadow: 0 4px 24px -12px rgba(0, 0, 0, 0.2);
+
+    --tag-normal-bg: rgba(22, 101, 52, 0.15);
+    --tag-normal-text: #4ade80;
+    --tag-normal-border: rgba(74, 222, 128, 0.2);
+    --tag-pneumonia-bg: rgba(153, 27, 27, 0.15);
+    --tag-pneumonia-text: #f87171;
+    --tag-pneumonia-border: rgba(248, 113, 113, 0.2);
+  }
+}
+
+/* ==========================================================================
+   VIEWPORT CONTAINMENT FLOW
+   ========================================================================== */
+.history-page {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 32px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  color: var(--history-text-main);
+  animation: history-fade-in 0.3s ease-out;
+}
+
+/* ==========================================================================
+   HEADER PANEL & INTEGRATED FILTERS
+   ========================================================================== */
+.history-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 24px;
+  border-bottom: 1px solid var(--history-border);
+  padding-bottom: 24px;
+}
+
+.history-header h1 {
+  font-size: 28px;
+  font-weight: 800;
+  margin: 0 0 6px 0;
+  letter-spacing: -0.02em;
+}
+
+.history-subtitle {
+  font-size: 14px;
+  color: var(--history-text-muted);
+  margin: 0;
+}
+
+.history-filters {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.history-filters input,
+.history-filters select {
+  background-color: var(--history-bg);
+  border: 1px solid var(--history-border);
+  color: var(--history-text-main);
+  padding: 10px 16px;
+  border-radius: 8px;
+  font-size: 14px;
+  outline: none;
+  transition: all 0.2s ease;
+}
+
+.history-filters input {
+  width: 280px;
+}
+
+.history-filters input:focus,
+.history-filters select:focus {
+  border-color: #0f4c81;
+  box-shadow: 0 0 0 3px rgba(15, 76, 129, 0.1);
+}
+
+/* ==========================================================================
+   DATA TABLE ARCHITECTURE
+   ========================================================================== */
+.table-container {
+  background: var(--history-bg);
+  border: 1px solid var(--history-border);
+  border-radius: var(--history-radius);
+  box-shadow: var(--history-shadow);
+  overflow-x: auto;
+}
+
+.history-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  font-size: 14px;
+}
+
+.history-table th {
+  background-color: var(--history-bg-surface);
+  color: var(--history-text-muted);
+  font-weight: 700;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--history-border);
+}
+
+.history-table td {
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--history-border);
+  vertical-align: middle;
+}
+
+.history-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.history-table tbody tr:hover {
+  background-color: var(--history-bg-surface);
+}
+
+/* Composite Columns */
+.patient-cell {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.patient-cell strong {
+  font-size: 14px;
+  color: var(--history-text-main);
+}
+
+.patient-cell small {
+  font-size: 12px;
+  color: var(--history-text-muted);
+  cursor: help;
+}
+
+/* ==========================================================================
+   STATUS TAG BADGES
+   ========================================================================== */
+.status-tag {
+  display: inline-flex;
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  border: 1px solid transparent;
+}
+
+.status-tag.normal {
+  background-color: var(--tag-normal-bg);
+  color: var(--tag-normal-text);
+  border-color: var(--tag-normal-border);
+}
+
+.status-tag.pneumonia {
+  background-color: var(--tag-pneumonia-bg);
+  color: var(--tag-pneumonia-text);
+  border-color: var(--tag-pneumonia-border);
+}
+
+/* ==========================================================================
+   ACTION SELECTIONS
+   ========================================================================== */
+.actions-cell {
+  display: flex;
+  gap: 8px;
+}
+
+.btn-view,
+.btn-delete {
+  padding: 6px 12px;
+  font-size: 13px;
+  font-weight: 600;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+}
+
+.btn-view {
+  background-color: var(--history-bg-surface);
+  border: 1px solid var(--history-border);
+  color: var(--history-text-main);
+}
+
+.btn-view:hover {
+  background-color: var(--history-border);
+}
+
+.btn-delete {
+  background-color: transparent;
+  border: 1px solid transparent;
+  color: #ef4444;
+}
+
+.btn-delete:hover {
+  background-color: rgba(239, 68, 68, 0.1);
+}
+
+/* ==========================================================================
+   PAGINATION BLOCK
+   ========================================================================== */
+.pagination {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 8px;
+  font-size: 14px;
+  color: var(--history-text-muted);
+}
+
+.pagination button {
+  background-color: var(--history-bg);
+  border: 1px solid var(--history-border);
+  color: var(--history-text-main);
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.pagination button:hover:not(:disabled) {
+  background-color: var(--history-bg-surface);
+  border-color: var(--history-text-muted);
+}
+
+.pagination button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.pagination strong {
+  color: var(--history-text-main);
+}
+
+/* ==========================================================================
+   FALLBACK BOXES (EMPTY / ERROR)
+   ========================================================================== */
+.empty-state,
+.error-banner {
+  padding: 48px;
+  text-align: center;
+  border-radius: var(--history-radius);
+  border: 1px dashed var(--history-border);
+  color: var(--history-text-muted);
+  font-weight: 500;
+}
+
+.error-banner {
+  color: #ef4444;
+  background-color: rgba(239, 68, 68, 0.05);
+  border-style: solid;
+  border-color: rgba(239, 68, 68, 0.2);
+}
+
+@keyframes history-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ==========================================================================
+   RESPONSIVE DESIGN BREAKPOINTS
+   ========================================================================== */
+@media (max-width: 900px) {
+  .history-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .history-filters {
+    width: 100%;
+  }
+
+  .history-filters input {
+    flex: 1;
+  }
+}
+
+/* ================================
+   Smooth Search Loading Overlay
+================================ */
+
+.table-container {
+  position: relative;
+  background: var(--history-bg);
+  border: 1px solid var(--history-border);
+  border-radius: var(--history-radius);
+  box-shadow: var(--history-shadow);
+  overflow-x: auto;
+  transition: all 0.25s ease;
+}
+
+.table-loading {
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.65);
+  backdrop-filter: blur(3px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 20;
+  animation: fadeIn 0.25s ease;
+}
+
+@media (prefers-color-scheme: dark) {
+  .table-loading {
+    background: rgba(15, 23, 42, 0.65);
+  }
+}
+
+.table-spinner {
+  width: 34px;
+  height: 34px;
+  border: 3px solid #dbeafe;
+  border-top: 3px solid #0f4c81;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+.history-table {
+  transition:
+    opacity 0.25s ease,
+    transform 0.25s ease;
+}
+
+.history-table.loading {
+  opacity: 0.45;
+  transform: scale(0.995);
+}
+
+.history-table tbody tr {
+  transition:
+    background 0.2s ease,
+    transform 0.18s ease,
+    opacity 0.18s ease;
+}
+
+.history-table tbody tr:hover {
+  transform: translateY(-1px);
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

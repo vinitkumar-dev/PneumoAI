@@ -1,0 +1,210 @@
+/* Toast.css */
+
+/* ==========================================================================
+   DESIGN SYSTEMS & COMPONENT VARIABLES
+   ========================================================================== */
+:root {
+  --ts-bg: rgba(255, 255, 255, 0.8);
+  --ts-border: rgba(226, 232, 240, 0.8);
+  --ts-text-main: #0f172a;
+  --ts-text-muted: #475569;
+
+  --ts-success: #10b981;
+  --ts-success-glow: rgba(16, 185, 129, 0.06);
+  --ts-error: #ef4444;
+  --ts-error-glow: rgba(239, 68, 68, 0.06);
+  --ts-warning: #f59e0b;
+  --ts-warning-glow: rgba(245, 158, 11, 0.06);
+  --ts-info: #0ea5e9;
+  --ts-info-glow: rgba(14, 165, 233, 0.06);
+
+  --ts-radius: 16px;
+  --ts-grid-unit: 8px;
+  --ts-transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  --ts-shadow: 0 16px 32px -8px rgba(15, 23, 42, 0.08);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --ts-bg: rgba(15, 23, 42, 0.75);
+    --ts-border: rgba(51, 65, 85, 0.5);
+    --ts-text-main: #f8fafc;
+    --ts-text-muted: #94a3b8;
+
+    --ts-success-glow: rgba(52, 211, 153, 0.12);
+    --ts-error-glow: rgba(248, 113, 113, 0.12);
+    --ts-warning-glow: rgba(252, 211, 77, 0.12);
+    --ts-info-glow: rgba(56, 189, 248, 0.12);
+    --ts-shadow: 0 20px 40px -8px rgba(0, 0, 0, 0.4);
+  }
+}
+
+/* ==========================================================================
+   PRIMARY FLOATING INTERFACE ANCHOR STRUCTURE
+   ========================================================================== */
+.toast-notification {
+  position: fixed;
+  bottom: calc(4 * var(--ts-grid-unit));
+  right: calc(4 * var(--ts-grid-unit));
+  min-width: 320px;
+  max-width: 440px;
+  background: var(--ts-bg);
+  backdrop-filter: blur(20px) saturate(160%);
+  -webkit-backdrop-filter: blur(20px) saturate(160%);
+  border: 1px solid var(--ts-border);
+  border-radius: var(--ts-radius);
+  box-shadow: var(--ts-shadow);
+  padding: calc(2 * var(--ts-grid-unit));
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: calc(2.5 * var(--ts-grid-unit));
+  box-sizing: border-box;
+  z-index: 50000;
+  transform-origin: bottom right;
+  animation: toast-entrance 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+@keyframes toast-entrance {
+  from {
+    opacity: 0;
+    transform: scale(0.9) translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+/* ==========================================================================
+   CONDITIONAL LAYER VISUAL STATES
+   ========================================================================== */
+.toast-notification.is-success {
+  border-left: 4px solid var(--ts-success);
+  background-image: linear-gradient(
+    to right,
+    var(--ts-success-glow),
+    transparent 30%
+  );
+}
+.toast-notification.is-success .toast-variant-icon {
+  color: var(--ts-success);
+}
+
+.toast-notification.is-error {
+  border-left: 4px solid var(--ts-error);
+  background-image: linear-gradient(
+    to right,
+    var(--ts-error-glow),
+    transparent 30%
+  );
+}
+.toast-notification.is-error .toast-variant-icon {
+  color: var(--ts-error);
+}
+
+.toast-notification.is-warning {
+  border-left: 4px solid var(--ts-warning);
+  background-image: linear-gradient(
+    to right,
+    var(--ts-warning-glow),
+    transparent 30%
+  );
+}
+.toast-notification.is-warning .toast-variant-icon {
+  color: var(--ts-warning);
+}
+
+.toast-notification.is-info {
+  border-left: 4px solid var(--ts-info);
+  background-image: linear-gradient(
+    to right,
+    var(--ts-info-glow),
+    transparent 30%
+  );
+}
+.toast-notification.is-info .toast-variant-icon {
+  color: var(--ts-info);
+}
+
+/* ==========================================================================
+   INTERNAL CONTENT BLOCKS
+   ========================================================================== */
+.toast-payload-group {
+  display: flex;
+  align-items: center;
+  gap: calc(1.5 * var(--ts-grid-unit));
+  min-width: 0;
+}
+
+.toast-variant-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.toast-message-text {
+  font-size: 13.5px;
+  font-weight: 600;
+  line-height: 1.45;
+  color: var(--ts-text-main);
+  margin: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ==========================================================================
+   DISMISS ELEMENT COMPONENT INTERACTIVES
+   ========================================================================== */
+.toast-dismiss-action {
+  background: none;
+  border: none;
+  color: var(--ts-text-muted);
+  width: 26px;
+  height: 26px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  outline: none;
+  flex-shrink: 0;
+  transition: var(--ts-transition);
+}
+
+.toast-dismiss-action:hover {
+  background-color: rgba(148, 163, 184, 0.12);
+  color: var(--ts-text-main);
+}
+
+.toast-dismiss-action:focus-visible {
+  box-shadow: inset 0 0 0 2px var(--ts-info);
+}
+
+.toast-dismiss-action:active {
+  transform: scale(0.95);
+}
+
+/* ==========================================================================
+   RESPONSIVE DESIGN SYSTEM MEDIA STRINGS
+   ========================================================================== */
+@media (max-width: 480px) {
+  .toast-notification {
+    bottom: calc(2 * var(--ts-grid-unit));
+    left: calc(2 * var(--ts-grid-unit));
+    right: calc(2 * var(--ts-grid-unit));
+    min-width: 0;
+    max-width: none;
+    padding: calc(2.2 * var(--ts-grid-unit)) calc(2 * var(--ts-grid-unit));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .toast-notification,
+  .toast-dismiss-action {
+    animation: none !important;
+    transition: none !important;
+    transform: none !important;
+  }
+}

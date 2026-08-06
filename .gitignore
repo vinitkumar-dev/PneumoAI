@@ -1,0 +1,89 @@
+# ==========================================================================
+# PNEUMOAI PROJECT SECURITY & MATRIX BLOCK CONFIGURATIONS
+# ==========================================================================
+
+# 1. CORE DEPENDENCIES ARCHIVE
+# --------------------------------------------------------------------------
+node_modules/
+jspm_packages/
+web_modules/
+.npm/
+pnpm-lock.yaml
+yarn-error.log
+
+# 2. RUNTIME BUILD COMPILATIONS & ENGINES
+# --------------------------------------------------------------------------
+dist/
+build/
+out/
+.next/
+.nuxt/
+.cache/
+.parcel-cache/
+.eslintcache
+.stylelintcache
+tsbuildinfo
+
+# 3. ENVIRONMENTS & SECRETS METRICS (CRITICAL FOR AUTH/API TOKENS)
+# --------------------------------------------------------------------------
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+*.menv
+*.menv.*
+!.env.example
+
+# 4. PYTHON AI/ML RUNTIME LOGISTICS (EFFICIENTNET & YOLO PIPELINES)
+# --------------------------------------------------------------------------
+__pycache__/
+*.py[cod]
+*$py.class
+.Python
+env/
+venv/
+ENV/
+mvenv/
+.env/
+.venv/
+poetry.lock
+Pipfile.lock
+.pytest_cache/
+.ipynb_checkpoints/
+
+# 5. NEURAL NETWORK WEIGHTS & DATASETS (NEVER DEPLOY HEAVY BINARIES)
+# --------------------------------------------------------------------------
+*.h5
+*.pt
+*.pth
+*.onnx
+*.weights
+*.pb
+*.tflite
+dataset/
+datasets/
+uploads/
+reports/*.pdf
+
+# 6. OPERATING SYSTEM TELEMETRY METADATA
+# --------------------------------------------------------------------------
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# 7. IDE SYSTEMS CONFIGURATIONS
+# --------------------------------------------------------------------------
+.vscode/
+!.vscode/settings.json
+!.vscode/extensions.json
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.swp.history/

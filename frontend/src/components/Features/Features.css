@@ -1,0 +1,271 @@
+/* ==========================================================================
+   Features.css
+   Platform Capabilities Showcase Section
+   ========================================================================== */
+
+:root {
+  --fe-bg: #f8fafc;
+  --fe-card-bg: #ffffff;
+  --fe-primary: #0f4c81;
+  --fe-border: rgba(226, 232, 240, 0.8);
+  --fe-text-main: #0f172a;
+  --fe-text-muted: #64748b;
+  --fe-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.04);
+  --fe-radius: 16px;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --fe-bg: #0f172a;
+    --fe-card-bg: #1e293b;
+    --fe-primary: #3b82f6;
+    --fe-border: rgba(51, 65, 85, 0.7);
+    --fe-text-main: #f8fafc;
+    --fe-text-muted: #94a3b8;
+    --fe-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.2);
+  }
+}
+
+/* ==========================================================================
+   VIEWPORT CONTAINMENT & AMBIENT ORB LIGHTING
+   ========================================================================== */
+.features {
+  position: relative;
+  background-color: var(--fe-bg);
+  padding: 80px 24px;
+  overflow: hidden;
+  width: 100%;
+}
+
+.features-blur-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.features-orb {
+  position: absolute;
+  background-color: var(--fe-primary);
+  opacity: 0.03;
+  filter: blur(120px);
+  border-radius: 50%;
+}
+
+.features-orb-1 {
+  width: 350px;
+  height: 350px;
+  top: 10%;
+  left: -5%;
+}
+
+.features-orb-2 {
+  width: 450px;
+  height: 450px;
+  bottom: 5%;
+  right: -5%;
+}
+
+@media (prefers-color-scheme: dark) {
+  .features-orb {
+    opacity: 0.05;
+  }
+}
+
+/* ==========================================================================
+   HEADER STRUCTURAL ANCHORS
+   ========================================================================== */
+.features-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 2;
+}
+
+.features-header {
+  text-align: center;
+  max-width: 700px;
+  margin: 0 auto 56px auto;
+}
+
+.section-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background-color: rgba(15, 76, 129, 0.08);
+  color: var(--fe-primary);
+  padding: 6px 14px;
+  border-radius: 30px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+
+@media (prefers-color-scheme: dark) {
+  .section-badge {
+    background-color: rgba(59, 130, 246, 0.15);
+  }
+}
+
+.badge-pulse-dot {
+  width: 6px;
+  height: 6px;
+  background-color: var(--fe-primary);
+  border-radius: 50%;
+  animation: badge-dot-flash 2s infinite ease-in-out;
+}
+
+.features-header h2 {
+  font-size: 32px;
+  font-weight: 800;
+  color: var(--fe-text-main);
+  margin: 0 0 16px 0;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+}
+
+.features-header p {
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--fe-text-muted);
+  margin: 0;
+}
+
+/* ==========================================================================
+   FEATURES CAPABILITIES GRID SYSTEM
+   ========================================================================== */
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 24px;
+}
+
+.feature-card {
+  background: var(--fe-card-bg);
+  border: 1px solid var(--fe-border);
+  border-radius: var(--fe-radius);
+  box-shadow: var(--fe-shadow);
+  padding: 36px 32px;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition:
+    transform 0.25s cubic-bezier(0.4, 0, 0.2, 1),
+    border-color 0.25s ease;
+}
+
+/* Interactive Border Glow Accent Lines */
+.feature-card-glow {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--fe-primary),
+    transparent
+  );
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+
+.feature-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--fe-primary);
+}
+
+.feature-card:hover .feature-card-glow {
+  opacity: 1;
+}
+
+/* ==========================================================================
+   CARD HARNESS COMPONENTS
+   ========================================================================== */
+.feature-icon-wrapper {
+  background-color: rgba(15, 76, 129, 0.05);
+  width: 52px;
+  height: 52px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 24px;
+  transition: background-color 0.2s ease;
+}
+
+@media (prefers-color-scheme: dark) {
+  .feature-icon-wrapper {
+    background-color: rgba(255, 255, 255, 0.04);
+  }
+}
+
+.feature-card:hover .feature-icon-wrapper {
+  background-color: rgba(15, 76, 129, 0.1);
+}
+
+@media (prefers-color-scheme: dark) {
+  .feature-card:hover .feature-icon-wrapper {
+    background-color: rgba(59, 130, 246, 0.15);
+  }
+}
+
+.feature-icon {
+  font-size: 24px;
+  user-select: none;
+}
+
+.feature-card h3 {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--fe-text-main);
+  margin: 0 0 10px 0;
+}
+
+.feature-card p {
+  font-size: 14px;
+  line-height: 1.55;
+  color: var(--fe-text-muted);
+  margin: 0;
+}
+
+/* ==========================================================================
+   ANIMATIONS & RESPONSIVE CONSTRAINTS
+   ========================================================================== */
+@keyframes badge-dot-flash {
+  0%,
+  100% {
+    opacity: 0.4;
+    transform: scale(0.9);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.1);
+  }
+}
+
+@media (max-width: 640px) {
+  .features {
+    padding: 50px 16px;
+  }
+  .features-header h2 {
+    font-size: 24px;
+  }
+  .features-header p {
+    font-size: 14px;
+  }
+  .features-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  .feature-card {
+    padding: 28px 24px;
+  }
+}

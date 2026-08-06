@@ -1,0 +1,243 @@
+/* ==========================================================================
+   PredictionDetails.css
+   Enterprise Case Telemetry & Demographics Workspace
+   ========================================================================== */
+
+:root {
+  --details-primary: #0f4c81;
+  --details-bg: #ffffff;
+  --details-bg-surface: #f8fafc;
+  --details-border: rgba(226, 232, 240, 0.8);
+  --details-text-main: #0f172a;
+  --details-text-muted: #64748b;
+  --details-shadow: 0 4px 24px -12px rgba(15, 23, 42, 0.05);
+  --details-radius-lg: 16px;
+  --details-radius-sm: 8px;
+  --details-transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --details-primary: #3b82f6;
+    --details-bg: #0f172a;
+    --details-bg-surface: #1e293b;
+    --details-border: rgba(51, 65, 85, 0.7);
+    --details-text-main: #f8fafc;
+    --details-text-muted: #94a3b8;
+    --details-shadow: 0 4px 24px -12px rgba(0, 0, 0, 0.2);
+  }
+}
+
+/* ==========================================================================
+   VIEWPORT SCALER & LAYOUT
+   ========================================================================== */
+.details-viewport-flow,
+.details-page {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 32px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  color: var(--details-text-main);
+  animation: details-fade-in 0.35s ease-out;
+}
+
+/* Shared Section Base Card Constraints */
+.details-page section {
+  background: var(--details-bg);
+  border: 1px solid var(--details-border);
+  border-radius: var(--details-radius-lg);
+  padding: 28px;
+  box-shadow: var(--details-shadow);
+}
+
+.details-page section h2 {
+  font-size: 18px;
+  font-weight: 700;
+  margin: 0 0 20px 0;
+  letter-spacing: -0.01em;
+}
+
+/* ==========================================================================
+   HEADER ACTIONS
+   ========================================================================== */
+.details-header {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-bottom: 8px;
+}
+
+.details-header h1 {
+  font-size: 28px;
+  font-weight: 800;
+  margin: 0;
+  letter-spacing: -0.02em;
+}
+
+.details-header p {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--details-text-muted);
+  font-family: monospace;
+  margin: 0;
+}
+
+/* ==========================================================================
+   PATIENT INFORMATION BANNERS
+   ========================================================================== */
+.patient-card {
+  border-left: 4px solid var(--details-primary) !important;
+}
+
+.patient-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  background-color: var(--details-bg-surface);
+  padding: 16px 20px;
+  border-radius: var(--details-radius-lg);
+  border: 1px solid var(--details-border);
+}
+
+.patient-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.patient-item span {
+  font-size: 11px;
+  text-transform: uppercase;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  color: var(--details-text-muted);
+}
+
+.patient-item strong {
+  font-size: 15px;
+  color: var(--details-text-main);
+}
+
+.patient-notes {
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 1px solid var(--details-border);
+}
+
+.patient-notes h3 {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--details-text-muted);
+  margin: 0 0 8px 0;
+}
+
+.patient-notes p {
+  font-size: 14px;
+  line-height: 1.6;
+  margin: 0;
+  color: var(--details-text-main);
+}
+
+/* ==========================================================================
+   PRIMARY INPUT IMAGING VIEWERS
+   ========================================================================== */
+.original-image-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.original-image {
+  max-width: 100%;
+  max-height: 400px;
+  object-fit: contain;
+  border-radius: var(--details-radius-sm);
+  border: 1px solid var(--details-border);
+  background: #000000;
+}
+
+/* ==========================================================================
+   METRIC & HEATMAP SPLIT PANELS
+   ========================================================================== */
+.prediction-summary {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  align-items: center;
+}
+
+.heatmap-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+
+/* AI Narrative Callout Panel */
+.explanation-card p {
+  font-size: 14px;
+  line-height: 1.7;
+  color: var(--details-text-main);
+  margin: 0;
+}
+
+/* ==========================================================================
+   INTERACTIVE ACTION INTERFACES (FOOTER)
+   ========================================================================== */
+.details-footer {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+
+/* ==========================================================================
+   EXCEPTIONAL SUSPENSE STATES (ERRORS)
+   ========================================================================== */
+.details-error {
+  background-color: rgba(239, 68, 68, 0.1);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  color: #ef4444;
+  padding: 16px;
+  border-radius: var(--details-radius-sm);
+  font-weight: 600;
+  text-align: center;
+}
+
+@keyframes details-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ==========================================================================
+   RESPONSIVE LAYOUT BREAKPOINTS
+   ========================================================================== */
+@media (max-width: 960px) {
+  .patient-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+
+  .prediction-summary,
+  .heatmap-grid,
+  .details-footer {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .patient-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .details-viewport-flow,
+  .details-page {
+    padding: 16px;
+  }
+}

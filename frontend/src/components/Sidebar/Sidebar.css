@@ -1,0 +1,182 @@
+/* Sidebar.css */
+
+/* ==========================================================================
+   DESIGN SYSTEMS & RUNTIME SIDEBAR VARIABLES
+   ========================================================================== */
+:root {
+  --sb-bg: rgba(255, 255, 255, 0.85);
+  --sb-border: rgba(226, 232, 240, 0.8);
+  --sb-text-main: #0f172a;
+  --sb-text-muted: #64748b;
+
+  --sb-accent: #0f4c81;
+  --sb-accent-bg: rgba(15, 76, 129, 0.06);
+  --sb-hover-bg: rgba(15, 76, 129, 0.03);
+
+  --sb-width-full: 260px;
+  --sb-width-collapsed: 72px;
+  --sb-grid-unit: 8px;
+  --sb-transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  --sb-shadow: 4px 0 24px -8px rgba(15, 23, 42, 0.04);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --sb-bg: rgba(15, 23, 42, 0.7);
+    --sb-border: rgba(51, 65, 85, 0.5);
+    --sb-text-main: #f8fafc;
+    --sb-text-muted: #64748b;
+
+    --sb-accent: #38bdf8;
+    --sb-accent-bg: rgba(56, 189, 248, 0.1);
+    --sb-hover-bg: rgba(255, 255, 255, 0.02);
+    --sb-shadow: 8px 0 32px -12px rgba(0, 0, 0, 0.4);
+  }
+}
+
+/* ==========================================================================
+   DRAWER LAYOUT ANCHORS & SHELL FRAMEWORKS
+   ========================================================================== */
+.sb-nav-container {
+  width: var(--sb-width-full);
+  min-height: 100vh;
+  height: 100%;
+  background: var(--sb-bg);
+  backdrop-filter: blur(20px) saturate(140%);
+  -webkit-backdrop-filter: blur(20px) saturate(140%);
+  border-right: 1px solid var(--sb-border);
+  box-shadow: var(--sb-shadow);
+  display: flex;
+  flex-direction: column;
+  gap: calc(3 * var(--sb-grid-unit));
+  padding: calc(2.5 * var(--sb-grid-unit));
+  box-sizing: border-box;
+  transition: var(--sb-transition);
+  position: relative;
+  flex-shrink: 0;
+}
+
+/* Structural Override for State Shrinkage */
+.sb-nav-container.is-collapsed {
+  width: var(--sb-width-collapsed);
+  padding: calc(2.5 * var(--sb-grid-unit)) calc(1.5 * var(--sb-grid-unit));
+}
+
+/* ==========================================================================
+   HEADER PANEL COMPONENTS
+   ========================================================================== */
+.sb-panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 40px;
+  padding: 0 4px;
+}
+
+.sb-nav-container.is-collapsed .sb-panel-header {
+  justify-content: center;
+  padding: 0;
+}
+
+.sb-brand-logo {
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--sb-text-main);
+  letter-spacing: -0.03em;
+  margin: 0;
+}
+
+/* Drawer Collapse Action Trigger */
+.sb-collapse-trigger {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  border: 1px solid var(--sb-border);
+  background-color: transparent;
+  color: var(--sb-text-main);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: var(--sb-transition);
+}
+
+.sb-collapse-trigger:hover {
+  background-color: var(--sb-hover-bg);
+  border-color: var(--sb-accent);
+}
+
+/* ==========================================================================
+   NAVIGATION ELEMENT LINKS MAPPING TRACKS
+   ========================================================================== */
+.sb-menu-track {
+  display: flex;
+  flex-direction: column;
+  gap: calc(1 * var(--sb-grid-unit));
+}
+
+.sb-menu-link {
+  display: flex;
+  align-items: center;
+  gap: calc(2 * var(--sb-grid-unit));
+  height: 44px;
+  padding: 0 calc(2 * var(--sb-grid-unit));
+  border-radius: 12px;
+  color: var(--sb-text-muted);
+  font-size: 14px;
+  font-weight: 600;
+  transition: var(--sb-transition);
+  position: relative;
+}
+
+.sb-nav-container.is-collapsed .sb-menu-link {
+  justify-content: center;
+  padding: 0;
+}
+
+/* Active and Hover Control Matrices states */
+.sb-menu-link:hover {
+  color: var(--sb-text-main);
+  background-color: var(--sb-hover-bg);
+}
+
+.sb-menu-link.is-active {
+  color: var(--sb-accent);
+  background-color: var(--sb-accent-bg);
+}
+
+/* Core Segment Metrics Label Elements */
+.sb-link-icon {
+  font-size: 16px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.sb-link-label {
+  white-space: nowrap;
+  animation: sb-label-fade 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes sb-label-fade {
+  from {
+    opacity: 0;
+    transform: translateX(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Accessibility configurations */
+@media (prefers-reduced-motion: reduce) {
+  .sb-nav-container,
+  .sb-collapse-trigger,
+  .sb-menu-link,
+  .sb-link-label {
+    transition: none !important;
+    animation: none !important;
+  }
+}

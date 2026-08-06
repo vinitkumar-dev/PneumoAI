@@ -1,0 +1,198 @@
+/* PredictionCard.css */
+
+/* ==========================================================================
+   DESIGN SYSTEMS & COMPONENT VARIABLES
+   ========================================================================== */
+:root {
+  --pc-bg: rgba(255, 255, 255, 0.7);
+  --pc-border: rgba(226, 232, 240, 0.8);
+  --pc-text-main: #0f172a;
+  --pc-text-muted: #475569;
+
+  --pc-safe: #10b981;
+  --pc-safe-bg: rgba(16, 185, 129, 0.08);
+  --pc-danger: #ef4444;
+  --pc-danger-bg: rgba(239, 68, 68, 0.08);
+
+  --pc-expl-bg: #f8fafc;
+  --pc-expl-border: #e2e8f0;
+
+  --pc-radius: 24px;
+  --pc-grid-unit: 8px;
+  --pc-transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  --pc-shadow: 0 16px 36px -12px rgba(15, 23, 42, 0.06);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --pc-bg: rgba(15, 23, 42, 0.6);
+    --pc-border: rgba(51, 65, 85, 0.5);
+    --pc-text-main: #f8fafc;
+    --pc-text-muted: #94a3b8;
+
+    --pc-safe: #34d399;
+    --pc-safe-bg: rgba(52, 211, 153, 0.12);
+    --pc-danger: #f87171;
+    --pc-danger-bg: rgba(248, 113, 113, 0.12);
+
+    --pc-expl-bg: rgba(30, 41, 59, 0.3);
+    --pc-expl-border: rgba(51, 65, 85, 0.4);
+    --pc-shadow: 0 24px 48px -12px rgba(0, 0, 0, 0.4);
+  }
+}
+
+/* ==========================================================================
+   PRIMARY INTERFACE CARD CONSTRUCTION
+   ========================================================================== */
+.prediction-card {
+  background: var(--pc-bg);
+  backdrop-filter: blur(24px) saturate(160%);
+  -webkit-backdrop-filter: blur(24px) saturate(160%);
+  border: 1px solid var(--pc-border);
+  border-radius: var(--pc-radius);
+  padding: calc(4 * var(--pc-grid-unit));
+  box-shadow: var(--pc-shadow);
+  box-sizing: border-box;
+  width: 100%;
+  margin-top: calc(3 * var(--grid-unit, 8px));
+  margin-bottom: calc(4 * var(--grid-unit, 8px));
+}
+
+/* ==========================================================================
+   HEADER CONDITIONAL BLOCKS
+   ========================================================================== */
+.prediction-header {
+  display: flex;
+  align-items: center;
+  gap: calc(2.5 * var(--pc-grid-unit));
+  margin-bottom: calc(4 * var(--pc-grid-unit));
+}
+
+.prediction-status-indicator {
+  width: 52px;
+  height: 52px;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.prediction-status-indicator.is-safe {
+  background-color: var(--pc-safe-bg);
+  color: var(--pc-safe);
+}
+
+.prediction-status-indicator.is-danger {
+  background-color: var(--pc-danger-bg);
+  color: var(--pc-danger);
+}
+
+.prediction-title-group h2 {
+  font-size: 26px;
+  font-weight: 800;
+  color: var(--pc-text-main);
+  margin: 0 0 2px 0;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+}
+
+.prediction-badge {
+  font-size: 11.5px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--pc-text-muted);
+}
+
+/* ==========================================================================
+   STRUCTURED TELEMETRY TELEMETRIC GRID
+   ========================================================================== */
+.prediction-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: calc(2 * var(--pc-grid-unit));
+  margin-bottom: calc(4 * var(--pc-grid-unit));
+}
+
+.prediction-item {
+  background: rgba(148, 163, 184, 0.03);
+  border: 1px solid var(--pc-border);
+  border-radius: 14px;
+  padding: calc(2 * var(--pc-grid-unit)) calc(2.5 * var(--pc-grid-unit));
+  min-width: 0; /* Guard against truncation leaks inside grids */
+}
+
+.item-label {
+  display: block;
+  font-size: 11.5px;
+  font-weight: 600;
+  color: var(--pc-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  margin-bottom: 4px;
+}
+
+.item-value {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--pc-text-main);
+  margin: 0;
+  line-height: 1.25;
+}
+
+.models-token-truncate {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ==========================================================================
+   EXPLAINABLE TEXTUAL BLOCKOUT PANELS
+   ========================================================================== */
+.explanation-card {
+  background-color: var(--pc-expl-bg);
+  border: 1px solid var(--pc-expl-border);
+  border-radius: 16px;
+  padding: calc(3 * var(--pc-grid-unit));
+}
+
+.explanation-header-node {
+  display: flex;
+  align-items: center;
+  gap: calc(1.25 * var(--pc-grid-unit));
+  color: var(--pc-text-main);
+  margin-bottom: calc(1.5 * var(--pc-grid-unit));
+}
+
+.explanation-header-node h4 {
+  font-size: 14px;
+  font-weight: 700;
+  margin: 0;
+  letter-spacing: -0.01em;
+}
+
+.explanation-text-payload {
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--pc-text-muted);
+  margin: 0;
+}
+
+/* ==========================================================================
+   DYNAMIC RESPONSIVE DESIGN ARCHITECTURE 
+   ========================================================================== */
+@media (max-width: 768px) {
+  .prediction-grid {
+    grid-template-columns: 1fr;
+    gap: calc(1.5 * var(--pc-grid-unit));
+  }
+
+  .prediction-card {
+    padding: calc(3 * var(--pc-grid-unit));
+  }
+
+  .prediction-title-group h2 {
+    font-size: 22px;
+  }
+}

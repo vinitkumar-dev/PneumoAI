@@ -1,0 +1,266 @@
+/* ConfidenceBar.css */
+
+/* ==========================================================================
+   DESIGN SYSTEMS & COMPONENT VARIABLES
+   ========================================================================== */
+:root {
+  --conf-bg-card: rgba(255, 255, 255, 0.7);
+  --conf-border: rgba(226, 232, 240, 0.8);
+  --conf-text-main: #0f172a;
+  --conf-text-muted: #475569;
+  --conf-track: #e2e8f0;
+
+  /* Status Color Systems */
+  --conf-excellent: #10b981;
+  --conf-excellent-bg: rgba(16, 185, 129, 0.1);
+  --conf-good: #0284c7;
+  --conf-good-bg: rgba(2, 132, 199, 0.1);
+  --conf-medium: #f59e0b;
+  --conf-medium-bg: rgba(245, 158, 11, 0.1);
+  --conf-low: #ef4444;
+  --conf-low-bg: rgba(239, 68, 68, 0.1);
+
+  --conf-radius: 20px;
+  --conf-shadow:
+    0 10px 30px -10px rgba(15, 23, 42, 0.04), 0 1px 3px rgba(15, 23, 42, 0.02);
+  --conf-transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --conf-bg-card: rgba(15, 23, 42, 0.6);
+    --conf-border: rgba(51, 65, 85, 0.5);
+    --conf-text-main: #f8fafc;
+    --conf-text-muted: #94a3b8;
+    --conf-track: #1e293b;
+
+    --conf-excellent: #34d399;
+    --conf-excellent-bg: rgba(52, 211, 153, 0.12);
+    --conf-good: #38bdf8;
+    --conf-good-bg: rgba(56, 189, 248, 0.12);
+    --conf-medium: #fbbf24;
+    --conf-medium-bg: rgba(251, 191, 36, 0.12);
+    --conf-low: #f87171;
+    --conf-low-bg: rgba(248, 113, 113, 0.12);
+
+    --conf-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.3);
+  }
+}
+
+/* ==========================================================================
+   CARD STRUCTURE
+   ========================================================================== */
+.confidence-card {
+  background: var(--conf-bg-card);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  border: 1px solid var(--conf-border);
+  border-radius: var(--conf-radius);
+  padding: 24px;
+  box-shadow: var(--conf-shadow);
+  box-sizing: border-box;
+  width: 100%;
+  margin-top: calc(3 * var(--grid-unit, 8px));
+  margin-bottom: calc(3 * var(--grid-unit, 8px));
+}
+
+/* ==========================================================================
+   HEADER SECTION
+   ========================================================================== */
+.confidence-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.confidence-title-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--conf-text-muted);
+}
+
+.confidence-icon {
+  flex-shrink: 0;
+  color: #0ea5e9;
+}
+
+.confidence-card h3 {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--conf-text-main);
+  margin: 0;
+  letter-spacing: -0.01em;
+}
+
+/* Status Badges */
+.confidence-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.confidence-badge.excellent {
+  color: var(--conf-excellent);
+  background: var(--conf-excellent-bg);
+}
+.confidence-badge.good {
+  color: var(--conf-good);
+  background: var(--conf-good-bg);
+}
+.confidence-badge.medium {
+  color: var(--conf-medium);
+  background: var(--conf-medium-bg);
+}
+.confidence-badge.low {
+  color: var(--conf-low);
+  background: var(--conf-low-bg);
+}
+
+.badge-marker {
+  font-size: 8px;
+  vertical-align: middle;
+}
+
+/* ==========================================================================
+   METER AND PROGRESS INFRASTRUCTURE
+   ========================================================================== */
+.meter-track-wrapper {
+  padding: 2px 0;
+  margin-bottom: 12px;
+}
+
+.progress-container {
+  width: 100%;
+  height: 8px;
+  background: var(--conf-track);
+  border-radius: 99px;
+  overflow: hidden;
+  position: relative;
+}
+
+.progress-fill {
+  height: 100%;
+  border-radius: 99px;
+  width: 0%; /* Dynamic overwrite applied dynamically via JS initialization */
+  transition: var(--conf-transition);
+  position: relative;
+}
+
+.progress-fill.excellent {
+  background: linear-gradient(90deg, #10b981, #059669);
+}
+.progress-fill.good {
+  background: linear-gradient(90deg, #38bdf8, #0284c7);
+}
+.progress-fill.medium {
+  background: linear-gradient(90deg, #f59e0b, #d97706);
+}
+.progress-fill.low {
+  background: linear-gradient(90deg, #ef4444, #dc2626);
+}
+
+.progress-glow {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 30px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4));
+  filter: blur(2px);
+}
+
+/* ==========================================================================
+   FOOTER METRICS
+   ========================================================================== */
+.confidence-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 20px;
+}
+
+.current-value {
+  font-size: 24px;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.02em;
+}
+
+.current-value.excellent {
+  color: var(--conf-excellent);
+}
+.current-value.good {
+  color: var(--conf-good);
+}
+.current-value.medium {
+  color: var(--conf-medium);
+}
+.current-value.low {
+  color: var(--conf-low);
+}
+
+.max-value {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--conf-text-muted);
+}
+
+/* ==========================================================================
+   CLINICAL NOTES DISCLOSURE
+   ========================================================================== */
+.confidence-note-box {
+  display: flex;
+  gap: 10px;
+  padding: 12px 14px;
+  background: rgba(148, 163, 184, 0.05);
+  border-radius: 10px;
+  border: 1px solid rgba(148, 163, 184, 0.08);
+}
+
+.note-icon {
+  flex-shrink: 0;
+  margin-top: 2px;
+  color: var(--conf-text-muted);
+  opacity: 0.8;
+}
+
+.confidence-note {
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--conf-text-muted);
+  margin: 0;
+}
+
+/* ==========================================================================
+   RESPONSIVE DESIGN ADAPTATIONS
+   ========================================================================== */
+@media (max-width: 480px) {
+  .confidence-card {
+    padding: 16px;
+  }
+
+  .confidence-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    margin-bottom: 16px;
+  }
+
+  .current-value {
+    font-size: 20px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .progress-fill {
+    transition: none !important;
+  }
+}

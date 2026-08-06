@@ -1,0 +1,338 @@
+/* Dashboard.css */
+
+/* ==========================================================================
+   DESIGN SYSTEMS & COMPONENT VARIABLES
+   ========================================================================== */
+:root {
+  --db-bg-card: rgba(255, 255, 255, 0.7);
+  --db-border: rgba(226, 232, 240, 0.8);
+  --db-text-main: #0f172a;
+  --db-text-muted: #475569;
+
+  --db-accent: #0f4c81;
+  --db-accent-hover: #0a355c;
+  --db-accent-glow: rgba(15, 76, 129, 0.05);
+
+  --db-danger: #ef4444;
+  --db-danger-bg: rgba(239, 68, 68, 0.06);
+  --db-success: #10b981;
+  --db-success-bg: rgba(16, 185, 129, 0.08);
+
+  --db-radius: 24px;
+  --db-grid-unit: 8px;
+  --db-transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  --db-shadow: 0 16px 36px -12px rgba(15, 23, 42, 0.04);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --db-bg-card: rgba(15, 23, 42, 0.6);
+    --db-border: rgba(51, 65, 85, 0.5);
+    --db-text-main: #f8fafc;
+    --db-text-muted: #94a3b8;
+
+    --db-accent: #38bdf8;
+    --db-accent-hover: #7dd3fc;
+    --db-accent-glow: rgba(56, 189, 248, 0.1);
+
+    --db-danger: #f87171;
+    --db-danger-bg: rgba(248, 113, 113, 0.1);
+    --db-success: #34d399;
+    --db-success-bg: rgba(52, 211, 153, 0.1);
+    --db-shadow: 0 24px 48px -12px rgba(0, 0, 0, 0.35);
+  }
+}
+
+/* ==========================================================================
+   WORKSPACE HEADER STYLINGS
+   ========================================================================== */
+.dashboard-view {
+  display: flex;
+  flex-direction: column;
+  gap: calc(4 * var(--db-grid-unit));
+  max-width: 1400px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.dashboard-header-panel {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: calc(3 * var(--db-grid-unit));
+}
+
+.welcome-meta-block h1 {
+  font-size: 28px;
+  font-weight: 800;
+  color: var(--db-text-main);
+  margin: 0 0 4px 0;
+  letter-spacing: -0.03em;
+}
+
+.welcome-meta-block p {
+  font-size: 15px;
+  color: var(--db-text-muted);
+  margin: 0;
+}
+
+.dashboard-primary-action-btn {
+  background-color: var(--db-accent);
+  color: #ffffff;
+  text-decoration: none;
+  height: 44px;
+  padding: 0 calc(3 * var(--db-grid-unit));
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: calc(1.25 * var(--db-grid-unit));
+  transition: var(--db-transition);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.dashboard-primary-action-btn:hover {
+  background-color: var(--db-accent-hover);
+  transform: translateY(-1px);
+}
+
+@media (prefers-color-scheme: dark) {
+  .dashboard-primary-action-btn {
+    color: #0f172a;
+  }
+}
+
+/* ==========================================================================
+   EXCEPTION ALERT BANNER
+   ========================================================================== */
+.dashboard-error-banner {
+  background-color: var(--db-danger-bg);
+  border: 1px solid var(--db-danger);
+  border-radius: 14px;
+  padding: calc(2 * var(--db-grid-unit));
+  display: flex;
+  align-items: center;
+  gap: calc(1.5 * var(--db-grid-unit));
+  color: var(--db-danger);
+  font-size: 14px;
+  font-weight: 600;
+}
+
+/* ==========================================================================
+   ANALYTICS COUNTER GRID HOUSING ARRAY
+   ========================================================================== */
+.analytics-summary-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: calc(3 * var(--db-grid-unit));
+}
+
+.analytics-summary-card {
+  background: var(--db-bg-card);
+  backdrop-filter: blur(24px) saturate(160%);
+  -webkit-backdrop-filter: blur(24px) saturate(160%);
+  border: 1px solid var(--db-border);
+  border-radius: var(--db-radius);
+  padding: calc(3.5 * var(--db-grid-unit));
+  box-shadow: var(--db-shadow);
+  display: flex;
+  flex-direction: column;
+  gap: calc(1 * var(--db-grid-unit));
+}
+
+.summary-card-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--db-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.summary-card-metric {
+  font-size: 32px;
+  font-weight: 800;
+  color: var(--db-text-main);
+  margin: 0;
+  letter-spacing: -0.02em;
+}
+
+/* ==========================================================================
+   HISTORIC LOGS DATA CONTAINER TABLE BLOCK
+   ========================================================================== */
+.dashboard-records-block {
+  background: var(--db-bg-card);
+  backdrop-filter: blur(24px) saturate(160%);
+  -webkit-backdrop-filter: blur(24px) saturate(160%);
+  border: 1px solid var(--db-border);
+  border-radius: var(--db-radius);
+  padding: calc(4 * var(--db-grid-unit));
+  box-shadow: var(--db-shadow);
+  display: flex;
+  flex-direction: column;
+  gap: calc(3 * var(--db-grid-unit));
+}
+
+.records-block-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.records-block-header h2 {
+  font-size: 19px;
+  font-weight: 800;
+  color: var(--db-text-main);
+  margin: 0;
+  letter-spacing: -0.01em;
+}
+
+.records-view-all-link {
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--db-accent);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: var(--db-transition);
+}
+
+.records-view-all-link:hover {
+  color: var(--db-accent-hover);
+  gap: 8px;
+}
+
+/* Table Architectural Mapping */
+.table-viewport-wrapper {
+  width: 100%;
+  overflow-x: auto;
+  border-radius: 14px;
+  border: 1px solid var(--db-border);
+}
+
+.records-data-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  font-size: 14px;
+}
+
+.records-data-table th {
+  background-color: rgba(0, 0, 0, 0.01);
+  color: var(--db-text-muted);
+  font-weight: 600;
+  padding: calc(2 * var(--db-grid-unit)) calc(2.5 * var(--db-grid-unit));
+  border-bottom: 1px solid var(--db-border);
+  font-size: 13px;
+}
+
+@media (prefers-color-scheme: dark) {
+  .records-data-table th {
+    background-color: rgba(255, 255, 255, 0.01);
+  }
+}
+
+.records-data-table td {
+  padding: calc(2.25 * var(--db-grid-unit)) calc(2.5 * var(--db-grid-unit));
+  border-bottom: 1px solid var(--db-border);
+  color: var(--db-text-main);
+}
+
+.records-data-table tr:last-child td {
+  border-bottom: none;
+}
+
+.records-data-table tbody tr {
+  transition: background-color 0.15s ease;
+}
+
+.records-data-table tbody tr:hover {
+  background-color: rgba(0, 0, 0, 0.01);
+}
+
+@media (prefers-color-scheme: dark) {
+  .records-data-table tbody tr:hover {
+    background-color: rgba(255, 255, 255, 0.015);
+  }
+}
+
+/* Semantic Classification Tokens */
+.timestamp-cell {
+  color: var(--db-text-muted) !important;
+  font-variant-numeric: tabular-nums;
+}
+
+.metric-cell-token {
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.pipeline-cell-token {
+  font-family: monospace;
+  font-size: 13px;
+  color: var(--db-text-muted);
+}
+
+.status-badge-token {
+  display: inline-flex;
+  padding: 4px calc(1.5 * var(--db-grid-unit));
+  border-radius: 8px;
+  font-size: 12.5px;
+  font-weight: 600;
+}
+
+.status-badge-token.is-positive {
+  background-color: var(--db-danger-bg);
+  color: var(--db-danger);
+}
+
+.status-badge-token.is-negative {
+  background-color: var(--db-success-bg);
+  color: var(--db-success);
+}
+
+/* Empty State Blocks Fallbacks */
+.records-empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: calc(6 * var(--db-grid-unit)) calc(4 * var(--db-grid-unit));
+  color: var(--db-text-muted);
+  gap: calc(1.5 * var(--db-grid-unit));
+}
+
+.records-empty-state p {
+  font-size: 14.5px;
+  margin: 0;
+  max-width: 360px;
+  line-height: 1.5;
+}
+
+/* ==========================================================================
+   RESPONSIVE LAYOUT MATRIX RESPONSES
+   ========================================================================== */
+@media (max-width: 768px) {
+  .dashboard-header-panel {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .dashboard-primary-action-btn {
+    justify-content: center;
+  }
+
+  .dashboard-records-block {
+    padding: calc(3 * var(--db-grid-unit));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dashboard-primary-action-btn,
+  .records-view-all-link {
+    transition: none !important;
+    transform: none !important;
+  }
+}

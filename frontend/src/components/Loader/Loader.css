@@ -1,0 +1,151 @@
+/* Loader.css */
+
+/* ==========================================================================
+   DESIGN SYSTEMS & COMPONENT VARIABLES
+   ========================================================================== */
+:root {
+  --ld-bg-surface: rgba(255, 255, 255, 0.85);
+  --ld-bg-fullscreen: #f8fafc;
+  --ld-text-main: #0f172a;
+  --ld-text-muted: #475569;
+  --ld-primary: #0284c7;
+  --ld-primary-glow: rgba(2, 132, 199, 0.25);
+  --ld-border: #e2e8f0;
+
+  --ld-grid-unit: 8px;
+  --ld-transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --ld-bg-surface: rgba(15, 23, 42, 0.8);
+    --ld-bg-fullscreen: #090e1a;
+    --ld-text-main: #f8fafc;
+    --ld-text-muted: #94a3b8;
+    --ld-primary: #38bdf8;
+    --ld-primary-glow: rgba(56, 189, 248, 0.3);
+    --ld-border: rgba(51, 65, 85, 0.5);
+  }
+}
+
+/* ==========================================================================
+   LAYOUT STRUCTURES & HOUSING WINDOWS
+   ========================================================================== */
+.loader-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: calc(6 * var(--ld-grid-unit));
+  background: var(--ld-bg-surface);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-radius: 20px;
+  border: 1px solid var(--ld-border);
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 400px;
+  margin: calc(3 * var(--ld-grid-unit)) auto;
+  text-align: center;
+}
+
+/* Fullscreen High-Priority Processing Shield */
+.loader-container.fullscreen {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  background-color: var(--ld-bg-fullscreen);
+  border: none;
+  border-radius: 0;
+  max-width: 100%;
+  margin: 0;
+}
+
+/* ==========================================================================
+   ANIMATION HARDWARE & HARDWARE CORE WIDGETS
+   ========================================================================== */
+.medical-loader-wrapper {
+  position: relative;
+  width: 72px;
+  height: 72px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: calc(3 * var(--ld-grid-unit));
+}
+
+/* Outer Spinning Ring Element */
+.loader-ring {
+  position: absolute;
+  inset: 0;
+  border: 3.5px solid var(--ld-border);
+  border-top-color: var(--ld-primary);
+  border-right-color: var(--ld-primary);
+  border-radius: 50%;
+  animation: ld-hardware-spin 0.9s cubic-bezier(0.53, 0.21, 0.29, 0.67) infinite;
+  will-change: transform;
+}
+
+@keyframes ld-hardware-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Inner Pulsing Medical Centerpiece Cross */
+.loader-pulse-core {
+  color: var(--ld-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  filter: drop-shadow(0 0 8px var(--ld-primary-glow));
+  animation: ld-medical-pulse 1.5s ease-in-out infinite;
+  will-change: transform, opacity;
+}
+
+@keyframes ld-medical-pulse {
+  0%,
+  100% {
+    transform: scale(0.92);
+    opacity: 0.8;
+  }
+  50% {
+    transform: scale(1.08);
+    opacity: 1;
+  }
+}
+
+/* ==========================================================================
+   TYPOGRAPHY ELEMENTS & LABELS
+   ========================================================================== */
+.loader-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--ld-text-main);
+  margin: 0 0 6px 0;
+  letter-spacing: -0.01em;
+}
+
+.loader-message {
+  font-size: 13.5px;
+  font-weight: 500;
+  line-height: 1.5;
+  color: var(--ld-text-muted);
+  margin: 0;
+  max-width: 280px;
+}
+
+/* ==========================================================================
+   REDUCED MOTION SUPPORT
+   ========================================================================== */
+@media (prefers-reduced-motion: reduce) {
+  .loader-ring {
+    animation: ld-hardware-spin 3s linear infinite;
+    border-right-color: var(--ld-border);
+  }
+  .loader-pulse-core {
+    animation: none !important;
+    transform: none !important;
+    opacity: 1 !important;
+  }
+}

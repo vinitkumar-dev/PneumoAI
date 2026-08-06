@@ -1,0 +1,21 @@
+{
+  "settings_version": "0.0.6",
+  "datasets_dir": "C:\\Users\\DELL\\OneDrive\\Desktop\\datasets",
+  "weights_dir": "C:\\Users\\DELL\\OneDrive\\Desktop\\medical-image-dashboard\\weights",
+  "runs_dir": "C:\\Users\\DELL\\OneDrive\\Desktop\\medical-image-dashboard\\runs",
+  "uuid": "8a9007026a8ae6cbddfceac64a762e456f548c9a472293fa76cfeb77683ffb54",
+  "sync": true,
+  "api_key": "",
+  "openai_api_key": "",
+  "clearml": true,
+  "comet": true,
+  "dvc": true,
+  "hub": true,
+  "mlflow": true,
+  "neptune": true,
+  "raytune": true,
+  "tensorboard": false,
+  "wandb": false,
+  "vscode_msg": true,
+  "openvino_msg": true
+}

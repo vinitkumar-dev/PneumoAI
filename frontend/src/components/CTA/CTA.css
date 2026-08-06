@@ -1,0 +1,282 @@
+/* CTA.css */
+
+/* ==========================================================================
+   DESIGN TOKENS & SYSTEM SCALARS
+   ========================================================================== */
+:root {
+  --cta-bg-section: #f8fafc;
+  --cta-gradient-card: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+  --cta-border: rgba(255, 255, 255, 0.08);
+  --cta-btn-primary: linear-gradient(135deg, #38bdf8 0%, #0284c7 100%);
+  --cta-btn-primary-hover: linear-gradient(135deg, #7dd3fc 0%, #0ea5e9 100%);
+  --cta-btn-secondary: rgba(255, 255, 255, 0.06);
+  --cta-btn-secondary-border: rgba(255, 255, 255, 0.15);
+  --cta-btn-secondary-hover: rgba(255, 255, 255, 0.12);
+  --cta-text-main: #ffffff;
+  --cta-text-muted: #94a3b8;
+  --cta-badge-bg: rgba(56, 189, 248, 0.1);
+  --cta-badge-text: #38bdf8;
+
+  --cta-grid-unit: 8px;
+  --cta-radius: 24px;
+  --cta-shadow:
+    0 20px 40px -15px rgba(15, 23, 42, 0.3),
+    0 0 50px -10px rgba(2, 132, 199, 0.1);
+  --cta-transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --cta-bg-section: #070a13;
+    --cta-gradient-card: linear-gradient(
+      135deg,
+      rgba(15, 23, 42, 0.4) 0%,
+      rgba(30, 41, 59, 0.4) 100%
+    );
+    --cta-border: rgba(255, 255, 255, 0.05);
+    --cta-shadow:
+      0 30px 60px -20px rgba(0, 0, 0, 0.5),
+      inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  }
+}
+
+/* ==========================================================================
+   LAYOUT STRUCTURE & BACKGROUND ORBS
+   ========================================================================== */
+.cta-section {
+  position: relative;
+  padding: calc(12 * var(--cta-grid-unit)) 0;
+  background-color: var(--cta-bg-section);
+  overflow: hidden;
+  contain: content;
+}
+
+.cta-container {
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 calc(6 * var(--cta-grid-unit));
+  box-sizing: border-box;
+}
+
+.cta-blur-backdrop {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.cta-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(100px);
+  opacity: 0.15;
+  will-change: transform;
+}
+
+.cta-orb-1 {
+  top: -20%;
+  left: 15%;
+  width: 500px;
+  height: 500px;
+  background: #0284c7;
+}
+
+.cta-orb-2 {
+  bottom: -30%;
+  right: 10%;
+  width: 450px;
+  height: 450px;
+  background: #0ea5e9;
+}
+
+/* ==========================================================================
+   PREMIUM CARD ARCHITECTURE
+   ========================================================================== */
+.cta-card {
+  position: relative;
+  z-index: 2;
+  background: var(--cta-gradient-card);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid var(--cta-border);
+  border-radius: var(--cta-radius);
+  box-shadow: var(--cta-shadow);
+  overflow: hidden;
+}
+
+.cta-content-wrapper {
+  padding: calc(10 * var(--cta-grid-unit)) calc(8 * var(--cta-grid-unit));
+  max-width: 820px;
+  margin: 0 auto;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+/* Embedded Micro-Gradients onto Card Background */
+.cta-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    circle at top left,
+    rgba(56, 189, 248, 0.08),
+    transparent 45%
+  );
+  pointer-events: none;
+}
+
+/* ==========================================================================
+   ELEMENT TYPOGRAPHY & INTERACTIVE METRICS
+   ========================================================================== */
+.cta-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: calc(1 * var(--cta-grid-unit));
+  padding: 6px 14px;
+  border-radius: 9999px;
+  background: var(--cta-badge-bg);
+  border: 1px solid rgba(56, 189, 248, 0.15);
+  color: var(--cta-badge-text);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  margin-bottom: calc(4 * var(--cta-grid-unit));
+}
+
+.cta-card h2 {
+  font-size: clamp(2rem, 4.5vw, 2.75rem);
+  color: var(--cta-text-main);
+  font-weight: 800;
+  line-height: 1.2;
+  letter-spacing: -0.03em;
+  margin: 0 0 calc(2.5 * var(--cta-grid-unit)) 0;
+}
+
+.cta-card p {
+  font-size: clamp(15px, 2vw, 17px);
+  color: var(--cta-text-muted);
+  line-height: 1.65;
+  margin: 0 0 calc(6 * var(--cta-grid-unit)) 0;
+}
+
+/* ==========================================================================
+   ACTION HANDLERS (BUTTONS)
+   ========================================================================== */
+.cta-buttons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: calc(2 * var(--cta-grid-unit));
+  flex-wrap: wrap;
+}
+
+/* Primary Action Module */
+.cta-primary-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: calc(1.5 * var(--cta-grid-unit));
+  height: 52px;
+  padding: 0 calc(4 * var(--cta-grid-unit));
+  background: var(--cta-btn-primary);
+  border: none;
+  border-radius: 14px;
+  color: #ffffff;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--cta-transition);
+  box-shadow: 0 4px 14px rgba(2, 132, 199, 0.3);
+}
+
+.cta-primary-btn:hover {
+  background: var(--cta-btn-primary-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(2, 132, 199, 0.45);
+}
+
+.cta-primary-btn:active {
+  transform: translateY(0);
+}
+
+.cta-primary-btn svg {
+  transition: transform 0.25s ease;
+}
+
+.cta-primary-btn:hover svg {
+  transform: translateX(3px);
+}
+
+/* Secondary Action Module */
+.cta-secondary-btn {
+  display: inline-flex;
+  align-items: center;
+  height: 50px;
+  padding: 0 calc(4 * var(--cta-grid-unit));
+  background: var(--cta-btn-secondary);
+  border: 1px solid var(--cta-btn-secondary-border);
+  border-radius: 14px;
+  color: #ffffff;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--cta-transition);
+}
+
+.cta-secondary-btn:hover {
+  background: var(--cta-btn-secondary-hover);
+  border-color: rgba(255, 255, 255, 0.3);
+  transform: translateY(-2px);
+}
+
+.cta-secondary-btn:active {
+  transform: translateY(0);
+}
+
+/* ==========================================================================
+   RESPONSIVE DESIGN Breakpoints
+   ========================================================================== */
+@media (max-width: 768px) {
+  .cta-section {
+    padding: calc(8 * var(--cta-grid-unit)) 0;
+  }
+
+  .cta-container {
+    padding: 0 calc(3 * var(--cta-grid-unit));
+  }
+
+  .cta-content-wrapper {
+    padding: calc(6 * var(--cta-grid-unit)) calc(4 * var(--cta-grid-unit));
+    text-align: left;
+  }
+
+  .cta-buttons {
+    justify-content: flex-start;
+    flex-direction: column;
+    align-items: stretch;
+    gap: calc(1.5 * var(--cta-grid-unit));
+  }
+
+  .cta-primary-btn,
+  .cta-secondary-btn {
+    justify-content: center;
+    width: 100%;
+    height: 48px;
+  }
+}
+
+@media (max-width: 480px) {
+  .cta-card {
+    border-radius: 16px;
+  }
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .cta-primary-btn,
+  .cta-secondary-btn,
+  .cta-primary-btn svg {
+    transition: none !important;
+    transform: none !important;
+  }
+}

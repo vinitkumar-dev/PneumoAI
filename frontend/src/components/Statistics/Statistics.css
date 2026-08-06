@@ -1,0 +1,194 @@
+/* ==========================================================================
+   Statistics.css
+   Live Framework Analytics Dashboard Elements
+   ========================================================================== */
+
+:root {
+  --st-bg: #f8fafc;
+  --st-card-bg: #ffffff;
+  --st-primary: #0f4c81;
+  --st-border: rgba(226, 232, 240, 0.8);
+  --st-text-main: #0f172a;
+  --st-text-muted: #64748b;
+  --st-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.04);
+  --st-radius: 14px;
+  --st-skeleton: #e2e8f0;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --st-bg: #0f172a;
+    --st-card-bg: #1e293b;
+    --st-primary: #3b82f6;
+    --st-border: rgba(51, 65, 85, 0.7);
+    --st-text-main: #f8fafc;
+    --st-text-muted: #94a3b8;
+    --st-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.2);
+    --st-skeleton: #334155;
+  }
+}
+
+/* ==========================================================================
+   HEADER BLOCK
+   ========================================================================== */
+.st-metrics-flow {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 24px;
+}
+
+.st-panel-header {
+  margin-bottom: 32px;
+}
+
+.st-panel-header h2 {
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--st-text-main);
+  margin: 0 0 6px 0;
+  letter-spacing: -0.02em;
+}
+
+.st-panel-header p {
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--st-text-muted);
+  margin: 0;
+}
+
+/* ==========================================================================
+   METRICS FLEX GRID SYSTEM
+   ========================================================================== */
+.st-metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 20px;
+}
+
+.st-metrics-card {
+  background-color: var(--st-card-bg);
+  border: 1px solid var(--st-border);
+  border-radius: var(--st-radius);
+  box-shadow: var(--st-shadow);
+  padding: 24px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  position: relative;
+  transition:
+    transform 0.2s cubic-bezier(0.4, 0, 0.2, 1),
+    border-color 0.2s ease;
+}
+
+.st-metrics-card:hover {
+  transform: translateY(-2px);
+  border-color: var(--st-primary);
+}
+
+/* Vector Housing Boxes */
+.st-icon-housing {
+  background-color: rgba(15, 76, 129, 0.05);
+  color: var(--st-primary);
+  width: 48px;
+  height: 48px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+@media (prefers-color-scheme: dark) {
+  .st-icon-housing {
+    background-color: rgba(59, 130, 246, 0.12);
+  }
+}
+
+/* ==========================================================================
+   CARD DATA TEXT FIELDS
+   ========================================================================== */
+.st-card-content {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  overflow: hidden;
+}
+
+.st-metric-value {
+  font-size: 24px;
+  font-weight: 800;
+  color: var(--st-text-main);
+  margin: 0;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+}
+
+.st-metric-suffix {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--st-text-muted);
+  margin-left: 2px;
+}
+
+.st-metric-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--st-text-muted);
+  margin: 0;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+/* ==========================================================================
+   DYNAMIC ASYNC LOADING SKELETON ENGINE
+   ========================================================================== */
+.st-skeleton-pulse {
+  display: inline-block;
+  background-color: var(--st-skeleton);
+  color: transparent !important;
+  border-radius: 4px;
+  width: 60px;
+  height: 28px;
+  user-select: none;
+  animation: st-skeleton-glow 1.5s infinite ease-in-out;
+}
+
+.st-metrics-card.is-loading .st-icon-housing {
+  background-color: var(--st-skeleton);
+  color: transparent;
+  animation: st-skeleton-glow 1.5s infinite ease-in-out;
+}
+
+@keyframes st-skeleton-glow {
+  0% {
+    opacity: 0.6;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.6;
+  }
+}
+
+/* ==========================================================================
+   RESPONSIVE DESIGN ADAPTATIONS
+   ========================================================================== */
+@media (max-width: 640px) {
+  .st-metrics-flow {
+    padding: 24px 16px;
+  }
+  .st-panel-header h2 {
+    font-size: 18px;
+  }
+  .st-metrics-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+  .st-metrics-card {
+    padding: 16px;
+    gap: 16px;
+  }
+}

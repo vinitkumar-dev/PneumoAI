@@ -1,0 +1,161 @@
+/* ==========================================================================
+   Report.css
+   Structured Patient Medical Report Generation UI Panel
+   ========================================================================== */
+
+:root {
+  --rp-card-bg: #ffffff;
+  --rp-primary: #0f4c81;
+  --rp-primary-hover: #0a3863;
+  --rp-border: rgba(226, 232, 240, 0.8);
+  --rp-text-main: #0f172a;
+  --rp-text-muted: #64748b;
+  --rp-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.04);
+  --rp-radius: 14px;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --rp-card-bg: #1e293b;
+    --rp-primary: #3b82f6;
+    --rp-primary-hover: #2563eb;
+    --rp-border: rgba(51, 65, 85, 0.7);
+    --rp-text-main: #f8fafc;
+    --rp-text-muted: #94a3b8;
+    --rp-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.2);
+  }
+}
+
+/* ==========================================================================
+   CONTAINMENT COMPONENT BAR BLOCK
+   ========================================================================== */
+.report-container-block {
+  background-color: var(--rp-card-bg);
+  border: 1px solid var(--rp-border);
+  border-radius: var(--rp-radius);
+  box-shadow: var(--rp-shadow);
+  padding: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  max-width: 1200px;
+  margin: 20px auto;
+  width: 100%;
+}
+
+/* Info Subgroup Contexts */
+.report-info {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  flex: 1;
+}
+
+/* ==========================================================================
+   ICON & TEXT SEGMENTS
+   ========================================================================== */
+.report-icon-box {
+  background-color: rgba(15, 76, 129, 0.06);
+  color: var(--rp-primary);
+  width: 46px;
+  height: 46px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+@media (prefers-color-scheme: dark) {
+  .report-icon-box {
+    background-color: rgba(59, 130, 246, 0.12);
+  }
+}
+
+.report-text-block {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.report-text-block h2 {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--rp-text-main);
+  margin: 0;
+  letter-spacing: -0.01em;
+}
+
+.report-text-block p {
+  font-size: 13.5px;
+  line-height: 1.45;
+  color: var(--rp-text-muted);
+  margin: 0;
+}
+
+/* ==========================================================================
+   ACTION BUTTON ENGAGEMENT CONTROLS
+   ========================================================================== */
+.download-action-btn {
+  background-color: var(--rp-primary);
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  padding: 11px 20px;
+  font-size: 13.5px;
+  font-weight: 700;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.download-action-btn:hover:not(:disabled) {
+  background-color: var(--rp-primary-hover);
+  transform: translateY(-0.5px);
+}
+
+.download-action-btn:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.download-action-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+/* ==========================================================================
+   RESPONSIVE DESIGN BREAKPOINTS
+   ========================================================================== */
+@media (max-width: 640px) {
+  .report-container-block {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 20px;
+    gap: 20px;
+  }
+
+  .report-info {
+    align-items: flex-start;
+    gap: 14px;
+  }
+
+  .report-icon-box {
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+  }
+
+  .report-icon-box svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .download-action-btn {
+    width: 100%;
+    text-align: center;
+    padding: 12px;
+  }
+}

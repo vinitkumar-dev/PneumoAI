@@ -1,0 +1,302 @@
+/* Navbar.css */
+
+/* ==========================================================================
+   DESIGN SYSTEMS & COMPONENT VARIABLES
+   ========================================================================== */
+:root {
+  --nv-bg: rgba(255, 255, 255, 0.8);
+  --nv-border: rgba(226, 232, 240, 0.8);
+  --nv-text-main: #0f172a;
+  --nv-text-muted: #64748b;
+  --nv-accent: #0ea5e9;
+  --nv-accent-hover: #0284c7;
+
+  --nv-height: 72px;
+  --nv-grid-unit: 8px;
+  --nv-transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  --nv-shadow: 0 4px 30px rgba(15, 23, 42, 0.02);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --nv-bg: rgba(15, 23, 42, 0.75);
+    --nv-border: rgba(51, 65, 85, 0.5);
+    --nv-text-main: #f8fafc;
+    --nv-text-muted: #94a3b8;
+    --nv-accent: #38bdf8;
+    --nv-accent-hover: #7dd3fc;
+    --nv-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+  }
+}
+
+/* ==========================================================================
+   HEADER STRUCTURAL SHELL
+   ========================================================================== */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: var(--nv-height);
+  background-color: var(--nv-bg);
+  backdrop-filter: blur(20px) saturate(160%);
+  -webkit-backdrop-filter: blur(20px) saturate(160%);
+  border-bottom: 1px solid var(--nv-border);
+  box-shadow: var(--nv-shadow);
+  z-index: 1000;
+  box-sizing: border-box;
+}
+
+.navbar-container {
+  max-width: 1280px;
+  height: 100%;
+  margin: 0 auto;
+  padding: 0 calc(6 * var(--nv-grid-unit));
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-sizing: border-box;
+}
+
+/* ==========================================================================
+   BRAND LOGO NODE LAYOUT
+   ========================================================================== */
+.navbar-logo {
+  display: flex;
+  align-items: center;
+  gap: calc(1.5 * var(--nv-grid-unit));
+  cursor: pointer;
+  outline: none;
+  user-select: none;
+}
+
+.navbar-logo-svg {
+  color: var(--nv-accent);
+}
+
+.logo-text-group h2 {
+  font-size: 17px;
+  font-weight: 800;
+  color: var(--nv-text-main);
+  margin: 0;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+}
+
+.logo-subtitle {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: var(--nv-text-muted);
+  display: block;
+}
+
+/* ==========================================================================
+   DESKTOP CORE NAVIGATION STREAM
+   ========================================================================== */
+.navbar-links {
+  display: flex;
+  align-items: center;
+  gap: calc(4 * var(--nv-grid-unit));
+}
+
+.nav-item {
+  font-size: 14.5px;
+  font-weight: 600;
+  color: var(--nv-text-muted);
+  text-decoration: none;
+  transition: var(--nv-transition);
+  position: relative;
+  padding: 4px 0;
+}
+
+.nav-item:hover {
+  color: var(--nv-text-main);
+}
+
+/* Micro-interaction layout indicator anchor line */
+.nav-item::after {
+  content: "";
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: var(--nv-accent);
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  border-radius: 2px;
+}
+
+.nav-item.active {
+  color: var(--nv-accent);
+}
+
+.nav-item.active::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+.mobile-guest-links {
+  display: none;
+}
+
+/* ==========================================================================
+   CONTROL DESK INTERACTIVE ARRAY (RIGHT)
+   ========================================================================== */
+.navbar-right {
+  display: flex;
+  align-items: center;
+  gap: calc(3 * var(--nv-grid-unit));
+}
+
+.guest-actions {
+  display: flex;
+  align-items: center;
+  gap: calc(3 * var(--nv-grid-unit));
+}
+
+.guest-login-link {
+  font-size: 14.5px;
+  font-weight: 600;
+  color: var(--nv-text-main);
+  text-decoration: none;
+  transition: var(--nv-transition);
+}
+
+.guest-login-link:hover {
+  color: var(--nv-accent);
+}
+
+.guest-register-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 38px;
+  padding: 0 16px;
+  font-size: 14px;
+  font-weight: 600;
+  border-radius: 10px;
+  background-color: var(--nv-text-main);
+  color: var(--nv-bg);
+  text-decoration: none;
+  transition: var(--nv-transition);
+}
+
+.guest-register-btn:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
+
+/* Responsive Trigger Switch */
+.menu-btn {
+  display: none;
+  background: none;
+  border: none;
+  color: var(--nv-text-main);
+  cursor: pointer;
+  padding: 6px;
+  border-radius: 8px;
+  transition: var(--nv-transition);
+  align-items: center;
+  justify-content: center;
+}
+
+.menu-btn:hover {
+  background-color: rgba(148, 163, 184, 0.08);
+}
+
+/* ==========================================================================
+   RESPONSIVE DESIGN VIEWPORT MODES
+   ========================================================================== */
+@media (max-width: 768px) {
+  .navbar-container {
+    padding: 0 calc(4 * var(--nv-grid-unit));
+  }
+
+  /* Transformation of standard bar link array to full mobile overlay menu */
+  .navbar-links {
+    position: fixed;
+    top: var(--nv-height);
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: calc(100vh - var(--nv-height));
+    background-color: var(--nv-bg);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    flex-direction: column;
+    align-items: stretch;
+    padding: calc(6 * var(--nv-grid-unit)) calc(5 * var(--nv-grid-unit));
+    gap: calc(2 * var(--nv-grid-unit));
+    transform: translateY(-100%);
+    opacity: 0;
+    pointer-events: none;
+    transition:
+      transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+      opacity 0.25s linear;
+    z-index: 999;
+    overflow-y: auto;
+  }
+
+  .navbar-links.active {
+    transform: translateY(0);
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .nav-item {
+    font-size: 18px;
+    padding: 14px 20px;
+    border-radius: 12px;
+    background-color: rgba(148, 163, 184, 0.04);
+    border: 1px solid var(--nv-border);
+  }
+
+  .nav-item::after {
+    display: none;
+  }
+
+  .nav-item.active {
+    background-color: rgba(14, 165, 233, 0.08);
+    border-color: rgba(14, 165, 233, 0.2);
+  }
+
+  /* Structural adaptation for mobile entry actions */
+  .mobile-guest-links {
+    display: flex;
+    flex-direction: column;
+    gap: calc(1.5 * var(--nv-grid-unit));
+    margin-top: calc(4 * var(--nv-grid-unit));
+  }
+
+  .mobile-register-btn {
+    background-color: var(--nv-accent);
+    color: #ffffff !important;
+    text-align: center;
+    justify-content: center;
+  }
+
+  .desktop-right,
+  .guest-actions {
+    display: none; /* Strip desktop configuration variants */
+  }
+
+  .menu-btn {
+    display: inline-flex;
+    z-index: 1001;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .navbar-links,
+  .nav-item,
+  .guest-register-btn,
+  .menu-btn {
+    transition: none !important;
+    transform: none !important;
+    animation: none !important;
+  }
+}

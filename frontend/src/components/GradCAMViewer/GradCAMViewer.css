@@ -1,0 +1,306 @@
+/* GradCAMViewer.css */
+
+/* ==========================================================================
+   DESIGN SYSTEMS & COMPONENT VARIABLES
+   ========================================================================== */
+:root {
+  --gc-bg-card: rgba(255, 255, 255, 0.7);
+  --gc-border: rgba(226, 232, 240, 0.8);
+  --gc-text-main: #0f172a;
+  --gc-text-muted: #475569;
+
+  --gc-accent: #0f4c81;
+  --gc-accent-hover: #0a355c;
+  --gc-accent-glow: rgba(15, 76, 129, 0.05);
+
+  --gc-danger: #ef4444;
+  --gc-danger-bg: rgba(239, 68, 68, 0.05);
+
+  --gc-radius: 24px;
+  --gc-grid-unit: 8px;
+  --gc-transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  --gc-shadow: 0 16px 36px -12px rgba(15, 23, 42, 0.04);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --gc-bg-card: rgba(15, 23, 42, 0.6);
+    --gc-border: rgba(51, 65, 85, 0.5);
+    --gc-text-main: #f8fafc;
+    --gc-text-muted: #94a3b8;
+
+    --gc-accent: #38bdf8;
+    --gc-accent-hover: #7dd3fc;
+    --gc-accent-glow: rgba(56, 189, 248, 0.08);
+
+    --gc-danger: #f87171;
+    --gc-danger-bg: rgba(248, 113, 113, 0.1);
+    --gc-shadow: 0 24px 48px -12px rgba(0, 0, 0, 0.35);
+  }
+}
+
+/* ==========================================================================
+   CARD STRUCTURE AND COMPONENT CONTAINER STACKS
+   ========================================================================== */
+.gc-telemetry-card {
+  background: var(--gc-bg-card);
+  backdrop-filter: blur(24px) saturate(160%);
+  -webkit-backdrop-filter: blur(24px) saturate(160%);
+  border: 1px solid var(--gc-border);
+  border-radius: var(--gc-radius);
+  box-shadow: var(--gc-shadow);
+  padding: calc(3 * var(--gc-grid-unit));
+  display: flex;
+  flex-direction: column;
+  gap: calc(2.5 * var(--gc-grid-unit));
+}
+
+.gc-panel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: calc(2 * var(--gc-grid-unit));
+}
+
+.gc-header-metadata h2 {
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--gc-text-main);
+  margin: 0 0 4px 0;
+  letter-spacing: -0.02em;
+}
+
+.gc-header-metadata p {
+  font-size: 13.5px;
+  color: var(--gc-text-muted);
+  margin: 0;
+  line-height: 1.45;
+}
+
+/* Operational Trigger Inputs */
+.gc-action-harness {
+  display: flex;
+  align-items: center;
+  gap: calc(1.5 * var(--gc-grid-unit));
+  flex-shrink: 0;
+}
+
+.gc-trigger-primary,
+.gc-trigger-secondary {
+  height: 36px;
+  padding: 0 14px;
+  font-size: 13px;
+  font-weight: 600;
+  border-radius: 10px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  box-sizing: border-box;
+  transition: var(--gc-transition);
+}
+
+.gc-trigger-primary {
+  background-color: var(--gc-accent);
+  color: #ffffff;
+  border: none;
+}
+
+.gc-trigger-primary:hover:not(:disabled) {
+  background-color: var(--gc-accent-hover);
+}
+
+.gc-trigger-secondary {
+  background-color: transparent;
+  color: var(--gc-text-main);
+  border: 1px solid var(--gc-border);
+}
+
+.gc-trigger-secondary:hover:not(:disabled) {
+  background-color: var(--gc-border);
+}
+
+.gc-trigger-primary:disabled,
+.gc-trigger-secondary:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+@media (prefers-color-scheme: dark) {
+  .gc-trigger-primary {
+    color: #0b0f19;
+  }
+}
+
+/* ==========================================================================
+   IMAGE VIEWPORT RENDERING HARNESSES
+   ========================================================================== */
+.gc-display-canvas {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  background-color: #05070f;
+  border-radius: 16px;
+  border: 1px solid var(--gc-border);
+  overflow: hidden;
+  position: relative;
+  display: flex;
+}
+
+.gc-rendered-matrix {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  opacity: 0;
+  transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.gc-rendered-matrix.is-active {
+  opacity: 1;
+}
+
+/* Runtime Handshake Loading & Danger Indicators */
+.gc-state-indicator {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: calc(1.5 * var(--gc-grid-unit));
+  padding: calc(3 * var(--gc-grid-unit));
+  box-sizing: border-box;
+  text-align: center;
+}
+
+.gc-state-indicator p {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--gc-text-muted);
+  margin: 0;
+}
+
+.gc-state-indicator.fallback-danger p {
+  color: var(--gc-danger);
+  font-weight: 600;
+}
+
+.gc-state-indicator.fallback-danger svg {
+  color: var(--gc-danger);
+}
+
+.gc-inline-spinner {
+  width: 24px;
+  height: 24px;
+  border: 2px solid var(--gc-border);
+  border-top-color: var(--gc-accent);
+  border-radius: 50%;
+  animation: gc-spin 0.6s linear infinite;
+}
+
+@keyframes gc-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ==========================================================================
+   FULLSCREEN PORTAL OVERLAY CONTAINER OVERRIDES
+   ========================================================================== */
+.gc-overlay-dialog {
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  background-color: rgba(5, 7, 15, 0.95);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: calc(4 * var(--gc-grid-unit));
+  animation: gc-modal-fade 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.gc-dialog-viewport {
+  position: relative;
+  width: 100%;
+  max-width: 85vh;
+  aspect-ratio: 1 / 1;
+  display: flex;
+}
+
+.gc-dialog-frame {
+  width: 100%;
+  height: 100%;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background-color: #000000;
+  display: flex;
+}
+
+.gc-dialog-matrix {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.gc-overlay-dismiss {
+  position: absolute;
+  top: calc(-6 * var(--gc-grid-unit));
+  right: 0;
+  background: none;
+  border: none;
+  color: #ffffff;
+  opacity: 0.7;
+  cursor: pointer;
+  padding: 8px;
+  transition: var(--gc-transition);
+}
+
+.gc-overlay-dismiss:hover {
+  opacity: 1;
+  transform: scale(1.05);
+}
+
+@keyframes gc-modal-fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* ==========================================================================
+   MEDIA QUERY RESPONSIVE CORRECTIONS
+   ========================================================================== */
+@media (max-width: 640px) {
+  .gc-panel-header {
+    flex-direction: column;
+    align-items: fill;
+  }
+
+  .gc-action-harness {
+    width: 100%;
+    grid-template-columns: 1fr 1fr;
+    display: grid;
+  }
+
+  .gc-trigger-primary,
+  .gc-trigger-secondary {
+    justify-content: center;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gc-trigger-primary,
+  .gc-trigger-secondary,
+  .gc-rendered-matrix,
+  .gc-overlay-dialog,
+  .gc-inline-spinner,
+  .gc-overlay-dismiss {
+    transition: none !important;
+    animation: none !important;
+    transform: none !important;
+  }
+}

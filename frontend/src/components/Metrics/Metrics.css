@@ -1,0 +1,238 @@
+/* Metrics.css */
+
+/* ==========================================================================
+   DESIGN SYSTEMS & COMPONENT VARIABLES
+   ========================================================================== */
+:root {
+  --mt-bg-card: rgba(255, 255, 255, 0.7);
+  --mt-border: rgba(226, 232, 240, 0.8);
+  --mt-text-main: #0f172a;
+  --mt-text-muted: #475569;
+  --mt-grid-unit: 8px;
+  --mt-radius: 20px;
+  --mt-shadow: 0 12px 30px -4px rgba(15, 23, 42, 0.04);
+  --mt-transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* Tokenized Accent Mapping Channels */
+  --ch-blue: #0284c7;
+  --ch-blue-bg: rgba(2, 132, 199, 0.08);
+  --ch-green: #10b981;
+  --ch-green-bg: rgba(16, 185, 129, 0.08);
+  --ch-orange: #f59e0b;
+  --ch-orange-bg: rgba(245, 158, 11, 0.08);
+  --ch-purple: #8b5cf6;
+  --ch-purple-bg: rgba(139, 92, 246, 0.08);
+  --ch-red: #ef4444;
+  --ch-red-bg: rgba(239, 68, 68, 0.08);
+  --ch-cyan: #06b6d4;
+  --ch-cyan-bg: rgba(6, 180, 212, 0.08);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --mt-bg-card: rgba(15, 23, 42, 0.65);
+    --mt-border: rgba(51, 65, 85, 0.5);
+    --mt-text-main: #f8fafc;
+    --mt-text-muted: #94a3b8;
+    --mt-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.3);
+
+    --ch-blue: #38bdf8;
+    --ch-blue-bg: rgba(56, 189, 248, 0.12);
+    --ch-green: #34d399;
+    --ch-green-bg: rgba(52, 211, 153, 0.12);
+    --ch-orange: #fbbf24;
+    --ch-orange-bg: rgba(251, 191, 36, 0.12);
+    --ch-purple: #a78bfa;
+    --ch-purple-bg: rgba(167, 139, 250, 0.12);
+    --ch-red: #f87171;
+    --ch-red-bg: rgba(248, 113, 113, 0.12);
+    --ch-cyan: #22d3ee;
+    --ch-cyan-bg: rgba(34, 211, 238, 0.12);
+  }
+}
+
+/* ==========================================================================
+   HEADER SECTION PARADIGM
+   ========================================================================== */
+.metrics-section {
+  width: 100%;
+  margin-top: calc(4 * var(--mt-grid-unit));
+  margin-bottom: calc(4 * var(--mt-grid-unit));
+  box-sizing: border-box;
+}
+
+.metrics-header {
+  margin-bottom: calc(4 * var(--mt-grid-unit));
+}
+
+.metrics-header h2 {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--mt-text-main);
+  margin: 0 0 6px 0;
+  letter-spacing: -0.02em;
+}
+
+.metrics-header p {
+  font-size: 14px;
+  color: var(--mt-text-muted);
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* ==========================================================================
+   METRICS GRID & THE GRID ARCHITECTURE
+   ========================================================================== */
+.metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: calc(2.5 * var(--mt-grid-unit));
+}
+
+.metric-card {
+  position: relative;
+  background: var(--mt-bg-card);
+  backdrop-filter: blur(20px) saturate(160%);
+  -webkit-backdrop-filter: blur(20px) saturate(160%);
+  border: 1px solid var(--mt-border);
+  border-radius: var(--mt-radius);
+  padding: calc(3 * var(--mt-grid-unit));
+  box-shadow: var(--mt-shadow);
+  display: flex;
+  align-items: center;
+  gap: calc(2.5 * var(--mt-grid-unit));
+  overflow: hidden;
+  box-sizing: border-box;
+  transition: var(--mt-transition);
+}
+
+.metric-card-inner-glow {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    circle at top left,
+    rgba(255, 255, 255, 0.03),
+    transparent 70%
+  );
+  pointer-events: none;
+}
+
+.metric-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 16px 36px -8px rgba(15, 23, 42, 0.08);
+}
+
+@media (prefers-color-scheme: dark) {
+  .metric-card:hover {
+    box-shadow: 0 24px 48px -12px rgba(0, 0, 0, 0.45);
+    border-color: rgba(255, 255, 255, 0.08);
+  }
+}
+
+/* ==========================================================================
+   ICON COMPONENT HOUSINGS (ACCENT MODULATORS)
+   ========================================================================== */
+.metric-icon-box {
+  width: 46px;
+  height: 46px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: var(--mt-transition);
+}
+
+/* Color Channel Modulators */
+.metric-icon-box.blue {
+  background-color: var(--ch-blue-bg);
+  color: var(--ch-blue);
+}
+.metric-icon-box.green {
+  background-color: var(--ch-green-bg);
+  color: var(--ch-green);
+}
+.metric-icon-box.orange {
+  background-color: var(--ch-orange-bg);
+  color: var(--ch-orange);
+}
+.metric-icon-box.purple {
+  background-color: var(--ch-purple-bg);
+  color: var(--ch-purple);
+}
+.metric-icon-box.red {
+  background-color: var(--ch-red-bg);
+  color: var(--ch-red);
+}
+.metric-icon-box.cyan {
+  background-color: var(--ch-cyan-bg);
+  color: var(--ch-cyan);
+}
+
+.metric-card:hover .metric-icon-box {
+  transform: scale(1.04);
+}
+
+/* ==========================================================================
+   TYPOGRAPHY LAYERS & VALUE FIELDS
+   ========================================================================== */
+.metric-details {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0; /* Protect string clipping inside grids */
+}
+
+.metric-details h4 {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--mt-text-muted);
+  margin: 0;
+  letter-spacing: -0.01em;
+}
+
+.metric-display-value {
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--mt-text-main);
+  margin: 0;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ==========================================================================
+   RESPONSIVE LAYOUT BREAKPOINTS
+   ========================================================================== */
+@media (max-width: 1024px) {
+  .metrics-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: calc(2 * var(--mt-grid-unit));
+  }
+}
+
+@media (max-width: 640px) {
+  .metrics-grid {
+    grid-template-columns: 1fr;
+    gap: calc(1.5 * var(--mt-grid-unit));
+  }
+
+  .metric-card {
+    padding: calc(2.5 * var(--mt-grid-unit));
+    border-radius: 16px;
+  }
+
+  .metric-display-value {
+    font-size: 20px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .metric-card,
+  .metric-icon-box {
+    transition: none !important;
+    transform: none !important;
+  }
+}
