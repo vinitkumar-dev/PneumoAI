@@ -1,68 +1,34 @@
-# 🫁 PneumoAI – AI-Powered Pneumonia Detection System
+# 🫁 PneumoAI - AI-Based Pneumonia Detection Using Chest X-Rays
 
-> An end-to-end Deep Learning-based web application that detects **Pneumonia from Chest X-ray images** using Convolutional Neural Networks (CNNs). The project also provides **Grad-CAM visualizations** for model explainability and an intuitive web interface for easy diagnosis.
+PneumoAI is an **AI-powered medical imaging application** that detects pneumonia from chest X-ray images using deep learning and computer vision techniques. The system uses transfer learning-based CNN models to classify X-ray images as **Pneumonia** or **Normal** and provides model explainability using **Grad-CAM heatmaps**.
 
-![Python](https://img.shields.io/badge/Python-3.11-blue)
-![Flask](https://img.shields.io/badge/Flask-Backend-black)
-![TensorFlow](https://img.shields.io/badge/TensorFlow-DeepLearning-orange)
-![React](https://img.shields.io/badge/React-Frontend-61DAFB)
-![License](https://img.shields.io/badge/License-MIT-green)
+The project provides an end-to-end pipeline including data preprocessing, model training, evaluation, explainable AI, Flask-based backend API, and an interactive web interface.
 
 ---
 
-# 📖 Overview
+## 🚀 Features
 
-Pneumonia is a serious lung infection that can be diagnosed through Chest X-ray images. Manual diagnosis can be time-consuming and prone to human error.
+- 🩻 **Chest X-Ray Image Analysis**
+  - Upload chest X-ray images for pneumonia prediction.
 
-**PneumoAI** leverages Deep Learning to automatically classify Chest X-ray images as **Normal** or **Pneumonia**, providing fast and accurate predictions while improving transparency through **Grad-CAM heatmaps**.
+- 🤖 **Deep Learning-Based Classification**
+  - Classifies images into:
+    - Normal
+    - Pneumonia
 
----
+- 🔍 **Explainable AI (XAI)**
+  - Integrated Grad-CAM visualization to highlight important regions influencing model decisions.
 
-# ✨ Features
+- 📊 **Multiple Model Comparison**
+  - Evaluated different CNN architectures:
+    - EfficientNet-B0
+    - DenseNet121
+    - ResNet50
 
-- ✅ Pneumonia Detection from Chest X-rays
-- ✅ Deep Learning CNN Models
-- ✅ High Prediction Accuracy
-- ✅ Grad-CAM Explainability
-- ✅ Image Upload Interface
-- ✅ REST API using Flask
-- ✅ Interactive Dashboard
-- ✅ Confidence Score
-- ✅ Responsive UI
-- ✅ Easy Deployment
+- ⚡ **Fast Prediction API**
+  - Flask REST API for model inference.
 
----
+- 🌐 **Web Application**
+  - User-friendly interface for image upload and prediction.
 
-# 🛠 Tech Stack
-
-## Frontend
-- React
-- HTML
-- CSS
-- JavaScript
-- Axios
-
-## Backend
-- Flask
-- Python
-- REST API
-
-## Deep Learning
-- TensorFlow
-- Keras
-- OpenCV
-- NumPy
-- Pandas
-- Matplotlib
-- Scikit-learn
-
----
-
-# 📊 Models Evaluated
-
-| Model | Accuracy | ROC-AUC | Weighted F1 Score |
-|--------|---------:|---------:|------------------:|
-| ResNet50 | 88.90% | 95.78% | 88.50% |
-| DenseNet121 | 89.83% | 96.15% | 89.41% |
-| **EfficientNet-B0** | **90.55%** | **96.80%** | **90.34%** |
 
