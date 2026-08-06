@@ -231,8 +231,8 @@ def process_prediction():
         return jsonify(response), 200
 
     except Exception as e:
-        logging.exception(e)
+    logging.exception(e)
 
-        return jsonify({
-            "error": str(e)
-        }),500
+    return jsonify({
+        "error": str(e)
+    }),500

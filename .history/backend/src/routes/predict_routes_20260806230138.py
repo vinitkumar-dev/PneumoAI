@@ -231,8 +231,10 @@ def process_prediction():
         return jsonify(response), 200
 
     except Exception as e:
-        logging.exception(e)
-
+        error_trace = traceback.format_exc()
+        logging.error(f"PREDICT ROUTE ERROR:\n{error_trace}")
         return jsonify({
-            "error": str(e)
-        }),500
+            "status": "error",
+            "message": str(e),
+            "trace": error_trace
+        }), 500
