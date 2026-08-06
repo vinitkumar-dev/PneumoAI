@@ -68,34 +68,3 @@
 # tqdm==4.66.5
 # PyYAML==6.0.2
 # reportlab==4.2.2
-
-
---extra-index-url https://download.pytorch.org/whl/cpu
-
-Flask==3.0.3
-Flask-Cors==5.0.0
-Flask-JWT-Extended==4.6.0
-Flask-SQLAlchemy==3.1.1
-Flask-Migrate==4.0.7
-
-SQLAlchemy==2.0.36
-PyMySQL==1.1.1
-python-dotenv==1.0.1
-
-gunicorn==23.0.0
-
-numpy==1.26.4
-Pillow==10.4.0
-
-torch==2.2.2+cpu
-torchvision==0.17.2+cpu
-
-opencv-python-headless==4.10.0.84
-
-grad-cam==1.5.4
-
-google-generativeai==0.8.5
-
-requests==2.32.3
-PyYAML==6.0.2
-reportlab==4.2.2
