@@ -198,7 +198,7 @@ class GradCAMGenerator:
     def load_model(self):
 
         if self.model:
-            return self.model
+        return self.model
 
         logging.info("Loading GradCAM model...")
 
@@ -240,7 +240,7 @@ class GradCAMGenerator:
 
         try:
 
-            model = self.model or self.load_model()
+            model = self.load_model()
 
             with Image.open(image_path).convert("RGB") as image:
 
