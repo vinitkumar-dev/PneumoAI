@@ -190,19 +190,19 @@ def process_prediction():
         }
 
         logging.info("Saving upload...")
-        filename, image_path = save_upload(file, UPLOAD_FOLDER)
+filename, image_path = save_upload(file, UPLOAD_FOLDER)
 
-        logging.info("Upload saved.")
+logging.info("Upload saved.")
 
-        logging.info("Creating explainer...")
-        explainer = get_explainer()
+logging.info("Creating explainer...")
+explainer = get_explainer()
 
-        logging.info("Explainer created.")
+logging.info("Explainer created.")
 
-        logging.info("Running explain()...")
-        result = explainer.explain(image_path)
+logging.info("Running explain()...")
+result = explainer.explain(image_path)
 
-        logging.info("Explain finished.")
+logging.info("Explain finished.")
 
         # Force production HTTPS URL
         base_url = "https://pneumoai-hgh9.onrender.com"

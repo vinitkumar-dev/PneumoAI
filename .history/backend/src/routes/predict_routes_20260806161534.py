@@ -189,20 +189,11 @@ def process_prediction():
             "clinical_notes": request.form.get("clinical_notes") or ""
         }
 
-        logging.info("Saving upload...")
         filename, image_path = save_upload(file, UPLOAD_FOLDER)
 
-        logging.info("Upload saved.")
-
-        logging.info("Creating explainer...")
+        # Run model
         explainer = get_explainer()
-
-        logging.info("Explainer created.")
-
-        logging.info("Running explain()...")
         result = explainer.explain(image_path)
-
-        logging.info("Explain finished.")
 
         # Force production HTTPS URL
         base_url = "https://pneumoai-hgh9.onrender.com"
