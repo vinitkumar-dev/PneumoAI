@@ -44,7 +44,6 @@ albumentations==1.4.18
 grad-cam==1.5.4
 
 
-ultralytics==8.2.103
 matplotlib==3.9.2
 
 # ==========================
