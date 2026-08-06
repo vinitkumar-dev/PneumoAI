@@ -5,50 +5,19 @@ from src.services.history_service import get_history
 from models.prediction import Prediction
 from database.db import db
 
+
+# =========================
+# BLUEPRINT
+# =========================
 history_bp = Blueprint(
     "history",
     __name__,
     url_prefix="/api/predictions"
 )
 
-# ==========================================================
-# PRODUCTION BASE URL
-# ==========================================================
-BASE_URL = "https://pneumoai-hgh9.onrender.com"
-
-
-def build_url(path):
-    """
-    Converts every stored path into a valid production URL.
-    Handles:
-        - Windows paths
-        - localhost URLs
-        - relative paths
-        - production URLs
-    """
-    if not path:
-        return None
-
-    path = str(path).replace("\\", "/")
-
-    # Remove localhost prefix from old DB records
-    path = path.replace("http://127.0.0.1:5000/", "")
-    path = path.replace("https://127.0.0.1:5000/", "")
-
-    # Already correct
-    if path.startswith(BASE_URL):
-        return path
-
-    # Other external URLs
-    if path.startswith("http://") or path.startswith("https://"):
-        return path
-
-    return f"{BASE_URL}/{path.lstrip('/')}"
-
-
-# ==========================================================
-# HISTORY
-# ==========================================================
+# =========================
+# HISTORY LIST
+# =========================
 @history_bp.route("/history", methods=["GET"])
 @jwt_required()
 def history():
@@ -70,9 +39,9 @@ def history():
     return jsonify(data), 200
 
 
-# ==========================================================
-# SINGLE PREDICTION
-# ==========================================================
+# =========================
+# GET SINGLE PREDICTION (VIEW)
+# =========================
 @history_bp.route("/<int:id>", methods=["GET"])
 @jwt_required()
 def get_prediction(id):
@@ -84,20 +53,32 @@ def get_prediction(id):
         user_id=user_id
     ).first()
 
-    if prediction is None:
+    if not prediction:
         return jsonify({
             "status": "error",
             "message": "Prediction not found"
         }), 404
 
+    # ==========================================================
+    # ALWAYS USE PRODUCTION URL
+    # ==========================================================
+    base_url = "https://pneumoai-hgh9.onrender.com"
+
+    def build_url(path):
+        if not path:
+            return None
+
+        path = path.replace("\\", "/")
+
+        if path.startswith("http://") or path.startswith("https://"):
+            return path
+
+        return f"{base_url}/{path.lstrip('/')}"
+
     return jsonify({
 
         "id": prediction.id,
-        "created_at": (
-            prediction.created_at.isoformat()
-            if prediction.created_at
-            else None
-        ),
+        "created_at": prediction.created_at.isoformat(),
 
         "patient_name": prediction.patient_name,
         "patient_age": prediction.patient_age,
@@ -129,10 +110,9 @@ def get_prediction(id):
 
     }), 200
 
-
-# ==========================================================
-# DELETE
-# ==========================================================
+# =========================
+# DELETE PREDICTION
+# =========================
 @history_bp.route("/<int:id>", methods=["DELETE"])
 @jwt_required()
 def delete_prediction(id):
@@ -144,7 +124,7 @@ def delete_prediction(id):
         user_id=user_id
     ).first()
 
-    if prediction is None:
+    if not prediction:
         return jsonify({
             "status": "error",
             "message": "Prediction not found"
