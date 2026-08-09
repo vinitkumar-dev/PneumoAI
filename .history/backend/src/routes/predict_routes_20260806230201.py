@@ -123,10 +123,11 @@
 
 
 
+
+
 import os
 import gc
 import traceback
-import torch
 from flask import Blueprint, request, jsonify
 from flask_jwt_extended import jwt_required, get_jwt_identity
 
@@ -141,6 +142,17 @@ predict_bp = Blueprint("predict", __name__)
 UPLOAD_FOLDER = "static/uploads"
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 
+_explainer_instance = None
+
+
+def get_explainer():
+    """Lazily initialize ExplainPipeline to save boot-up RAM."""
+    global _explainer_instance
+    if _explainer_instance is None:
+        logging.info("Initializing ExplainPipeline lazily...")
+        _explainer_instance = ExplainPipeline()
+    return _explainer_instance
+
 
 @predict_bp.route("/predict", methods=["POST"])
 @jwt_required()
@@ -148,8 +160,8 @@ def predict():
     return process_prediction()
 
 
+
 def process_prediction():
-    explainer = None
     try:
         user_id = int(get_jwt_identity())
 
@@ -173,17 +185,16 @@ def process_prediction():
 
         logging.info("Saving upload...")
         filename, image_path = save_upload(file, UPLOAD_FOLDER)
+
         logging.info("Upload saved.")
 
-        # Instantiate pipeline per-request to avoid keeping heavy PyTorch models in RAM permanently
-        logging.info("Initializing ExplainPipeline...")
-        explainer = ExplainPipeline()
+        logging.info("Creating explainer...")
+        explainer = get_explainer()
 
-        logging.info("Running explain() inside torch.no_grad()...")
-        
-        # Disable gradient computation to save ~60% RAM during inference
-        with torch.no_grad():
-            result = explainer.explain(image_path)
+        logging.info("Explainer created.")
+
+        logging.info("Running explain()...")
+        result = explainer.explain(image_path)
 
         logging.info("Explain finished.")
 
@@ -214,18 +225,14 @@ def process_prediction():
             else None
         )
 
+        # Force garbage collection to prevent 502 OOM crashes
+        gc.collect()
+
         return jsonify(response), 200
 
     except Exception as e:
         logging.exception(e)
-        return jsonify({
-            "status": "error",
-            "error": str(e)
-        }), 500
 
-    finally:
-        # Aggressive memory cleanup after every execution (success or failure)
-        del explainer
-        if torch.cuda.is_available():
-            torch.cuda.empty_cache()
-        gc.collect()
+        return jsonify({
+            "error": str(e)
+        }),500
