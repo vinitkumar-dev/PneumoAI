@@ -1,0 +1,33 @@
+{
+    "accuracy": 0.905448717948718,
+    "auc_roc": 0.9679706333552488,
+    "precision_weighted": 0.9093822843822844,
+    "recall_weighted": 0.905448717948718,
+    "f1_weighted": 0.9034021534021534,
+    "f1_macro": 0.8952158952158953,
+    "sensitivity": 0.9743589743589743,
+    "specificity": 0.7905982905982906,
+    "confusion_matrix": [
+        [
+            185,
+            49
+        ],
+        [
+            10,
+            380
+        ]
+    ],
+    "confusion_matrix_normalized": [
+        [
+            0.7905982905982906,
+            0.2094017094017094
+        ],
+        [
+            0.02564102564102564,
+            0.9743589743589743
+        ]
+    ],
+    "classification_report": "              precision    recall  f1-score   support\n\n      NORMAL       0.95      0.79      0.86       234\n   PNEUMONIA       0.89      0.97      0.93       390\n\n    accuracy                           0.91       624\n   macro avg       0.92      0.88      0.90       624\nweighted avg       0.91      0.91      0.90       624\n",
+    "decision_threshold": 0.5,
+    "num_samples": 624
+}

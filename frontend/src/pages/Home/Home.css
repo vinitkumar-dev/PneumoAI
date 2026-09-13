@@ -1,0 +1,84 @@
+/* Home.css */
+
+/* ==========================================================================
+   DESIGN SYSTEMS & LANDING LAYOUT VARIABLES
+   ========================================================================== */
+:root {
+  --hm-bg: #f8fafc;
+  --hm-text-main: #0f172a;
+  --hm-grid-unit: 8px;
+  --hm-max-width: 1440px;
+  --hm-transition: padding 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --hm-bg: #0b0f19;
+    --hm-text-main: #f8fafc;
+  }
+}
+
+/* ==========================================================================
+   CORE LANDING WRAPPER AND STRUCTURE AXIS
+   ========================================================================== */
+.landing-page-root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--hm-bg);
+  color: var(--hm-text-main);
+  overflow-x: hidden;
+  position: relative;
+  margin-top: 5rem;
+}
+
+/* Content Flow Stack 
+   Enforces standardized spatial intervals down the section array 
+*/
+.landing-viewport-flow {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+  width: 100%;
+}
+
+/* Target baseline structural resets for composite section modules */
+.landing-viewport-flow > identity,
+.landing-viewport-flow > section {
+  width: 100%;
+  max-width: var(--hm-max-width);
+  margin-left: auto;
+  margin-right: auto;
+  box-sizing: border-box;
+  padding: calc(10 * var(--hm-grid-unit)) calc(6 * var(--hm-grid-unit));
+  transition: var(--hm-transition);
+}
+
+/* Target first slice (Hero context) to remove aggressive structural gaps */
+.landing-viewport-flow > :first-child {
+  padding-top: calc(4 * var(--hm-grid-unit));
+}
+
+/* ==========================================================================
+   RESPONSIVE FLOW CONTROLS
+   ========================================================================== */
+@media (max-width: 1024px) {
+  .landing-viewport-flow > identity,
+  .landing-viewport-flow > section {
+    padding: calc(8 * var(--hm-grid-unit)) calc(4 * var(--hm-grid-unit));
+  }
+}
+
+@media (max-width: 768px) {
+  .landing-viewport-flow > identity,
+  .landing-viewport-flow > section {
+    padding: calc(6 * var(--hm-grid-unit)) calc(2.5 * var(--hm-grid-unit));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .landing-viewport-flow > identity,
+  .landing-viewport-flow > section {
+    transition: none !important;
+  }
+}
